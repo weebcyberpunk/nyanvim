@@ -138,11 +138,11 @@ vim.keymap.set("n", "si", ":vsp<CR>")
 vim.keymap.set("n", "su", ":sp<CR>")
 
 -- snippets
-vim.keymap.set("n", ";c", ":-1r ~/.local/share/nvim/snippets/skeleton.c<CR>7j8l :-1r ! date +'\\%b \\%d, \\%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>\"aph2xl")
-vim.keymap.set("n", ";ds", ":-1r ~/.local/share/nvim/snippets/script-doc.sh<CR>2j8l:r ! date +'\\%b \\%d, \\%Y'<CR>kJjdd")
-vim.keymap.set("n", ";mitc", ":r ~/.local/share/nvim/snippets/mit.c<CR>j :r ! date +'\\%Y'<CR>kJJ")
-vim.keymap.set("n", ";mits", ":-1r ~/.local/share/nvim/snippets/mit.sh<CR>j :r ! date +'\\%Y'<CR>kJJ")
-vim.keymap.set("n", ";mitt", ":-1r ~/.local/share/nvim/snippets/mit.txt<CR>:r ! date +'\\%Y'<CR>kJJ")
+vim.keymap.set("n", ";c", ":-1r ~/.config/nvim/snippets/skeleton.c<CR>7j8l :-1r ! date +'\\%b \\%d, \\%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>\"aph2xl")
+vim.keymap.set("n", ";ds", ":-1r ~/.config/nvim/snippets/script-doc.sh<CR>2j8l:r ! date +'\\%b \\%d, \\%Y'<CR>kJjdd")
+vim.keymap.set("n", ";mitc", ":r ~/.config/nvim/snippets/mit.c<CR>j :r ! date +'\\%Y'<CR>kJJ")
+vim.keymap.set("n", ";mits", ":-1r ~/.config/nvim/snippets/mit.sh<CR>j :r ! date +'\\%Y'<CR>kJJ")
+vim.keymap.set("n", ";mitt", ":-1r ~/.config/nvim/snippets/mit.txt<CR>:r ! date +'\\%Y'<CR>kJJ")
 
 -- telescope
 vim.keymap.set("n", "<C-n>", ":Telescope file_browser<CR>")
