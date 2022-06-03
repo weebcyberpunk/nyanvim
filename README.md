@@ -16,7 +16,7 @@ Current features:
 - Zen and pencil mode for writing documents.  
 - Prettiness (default theme: [catppuccin](https://github.com/catppuccin/nvim).
   Looks amazing inside [my custom DWM
-  desktop](https://github.com/weebcyberpunk/ggidle).  
+  desktop](https://github.com/weebcyberpunk/ggidle)).  
 - Tetris.  
 - Cute cats and anime girls.  
 
