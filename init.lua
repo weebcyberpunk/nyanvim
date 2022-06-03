@@ -38,21 +38,21 @@ require('packer').startup(function(use)
 	use 'windwp/nvim-ts-autotag'
 	use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
 	use 'tpope/vim-commentary'
-	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '\tm', }
+	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
 	-- files and filers
 	use 'nvim-telescope/telescope.nvim'
-	use 'nvim-lua/plenary.nvim'
+	use 'nvim-lua/plenary.nvim' -- this is dependency. DON'T REMOVE UNLESS YOU KNOW WHAT YOU'RE DOING!
 	use 'nvim-telescope/telescope-file-browser.nvim'
 	-- git integration
 	use  'lewis6991/gitsigns.nvim'
 	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
 	-- make terminal great again
-	use { 'voldikss/vim-floaterm', opt = true, keys = '<C-t>', cmd = { 'FloatermNew', 'FloatermToggle' }, config = function()
+	use { 'voldikss/vim-floaterm', opt = true, keys = { '<C-t>', '<C-c>n', }, cmd = { 'FloatermNew', 'FloatermToggle' }, config = function()
 		vim.cmd('hi FloatermBorder guibg=NONE')
 	end 
 	}
 	-- appearance
-	use { 'catppuccin/nvim', as = 'catppucin', 
+	use { 'catppuccin/nvim', as = 'catppuccin', 
 		-- commit = 'f079dda' 
 	}
 	-- visual
