@@ -64,7 +64,7 @@ Plugins:
 - [cmp](https://github.com/hrsh7th/nvim-cmp): Autocompletion engine.  
 - [LSP Config](https://github.com/neovim/nvim-lspconfig): NeoVim common configs
   for language servers.  
-- [Lua Snips](https://github.com/saadparwaiz1/cmp_luasnip): Snippets source for
+- [Lua Snips](https://github.com/L3MON4D3/LuaSnip): Snippets source for
   cmp.  
 - [Rust Tools](https://github.com/simrat39/rust-tools.nvim): Improvements on
   Rust programming.  
