@@ -87,7 +87,7 @@ TreeSitter configs on `init.lua`:
 
 ## Git integration
 
-![Fugitive Git wrapper](share/fugitive.png)  
+![Fugitive Git wrapper](share/fugitive.png)
 ![Git Signs](share/gitsigns.png)  
 
 Git integration is done three times:
@@ -115,7 +115,7 @@ General "must-have" IDE features:
 
 ### File browsing
 
-![Telescope File Browser](share/filebrowse.png)  
+![Telescope File Browser](share/filebrowse.png)
 ![Telescope Git](share/telescopegit.png)  
 
 For file browsing, NyanVim uses the [file
