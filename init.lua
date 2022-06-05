@@ -76,7 +76,7 @@ require('packer').startup(function(use)
 		})
 	end
 	}
-	use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
+	use 'nvim-treesitter/nvim-treesitter'
 	-- lsp, completion and all that modern stuff
 	use 'simrat39/rust-tools.nvim'
 	use 'p00f/clangd_extensions.nvim'

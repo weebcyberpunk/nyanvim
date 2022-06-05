@@ -30,10 +30,10 @@ find your way inside it.
 
 ## Installing and Bootstraping
 
-The [Packer package manager](https://github.com/wbthomason/packer.nvim) will
-start a bootstrap process the first time you start NeoVim with the config,
-installing all the plugins automagically. To make sure everything will work as
-expected, restart NeoVim.
+The config file have settings to start a bootstrap process of the [Packer
+package manager](https://github.com/wbthomason/packer.nvim), so you do not have
+to install it manually. The first time you run NeoVim with the NyanVim config,
+it'll automagically install Packer and all required plugins.
 
 You can install the entire repository as `~/.config/nvim` so you can run a `git
 pull` to keep in sync with my updates, or you can install just the `init.lua`
@@ -43,8 +43,8 @@ will not be able to use my snippets if installing only the `init.lua` file.
 ### Known bugs
 
 Packer used to fail to run the command needed to update the TreeSitter parsers,
-so you will need to run it manually to install and update them
-(`:TSUpdateSync`).
+so that has been removed from the config, so you will need to run it manually to
+install and update them (`:TSUpdateSync`) everytime TreeSitter is updated.
 
 ## LSP and autocomplete
 
