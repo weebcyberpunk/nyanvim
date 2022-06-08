@@ -58,7 +58,8 @@ require('packer').startup(function(use)
 	-- visual
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'nvim-lualine/lualine.nvim'
-	use 'startup-nvim/startup.nvim'
+	-- use 'startup-nvim/startup.nvim'
+	use 'goolord/alpha-nvim'
 	-- unfortunatelly I cannot remove this from here
 	use { 'folke/zen-mode.nvim', opt = true, cmd = { 'ZenMode' }, config = function()
 		require('zen-mode').setup({
@@ -149,6 +150,14 @@ vim.keymap.set("n", "<C-n>", ":Telescope file_browser<CR>")
 vim.keymap.set("n", "<C-d>", ":Telescope diagnostics<CR>")
 vim.keymap.set("n", "<C-s>", ":Telescope lsp_references<CR>")
 vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
+
+-- remap :q so it'll prevent you from leaving NyanVim if you're inside
+-- tmux (because I have a tmux server running nvim)
+if( os.getenv('TMUX') ) then
+	vim.keymap.set("c", "q<CR>", "close<CR>")
+	vim.keymap.set("c", "wq<CR>", "w<CR>:close<CR>")
+	vim.keymap.set("c", "quit<CR>", ":e ~/.config/nvim/init.lua<CR>:%bd<CR>:silent !tmux detach<CR>:intro<CR>")
+end
 -- }}}
 
 -- TERMINAL {{{
@@ -159,7 +168,8 @@ vim.g.floaterm_keymap_prev = "<C-c>h"
 vim.keymap.set("n", "<C-c>p", ":FloatermNew python<CR>")
 vim.keymap.set("n", "<C-c>f", ":FloatermNew lf<CR>")
 
-vim.g.floaterm_width = vim.o.columns
+-- vim.g.floaterm_width = vim.o.columns
+vim.g.floaterm_width = 0.99
 vim.g.floaterm_height = 0.7
 vim.g.floaterm_position = "bottom"
 vim.g.floaterm_title = "Terminal $1"
@@ -265,17 +275,6 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		vim.opt.formatoptions = vim.opt.formatoptions - 't'
 	end
 })
-
-vim.api.nvim_create_autocmd({'FileType'}, {
-	pattern = {
-		'startup',
-	},
-	group = buf_settings,
-	desc = 'Remove lualine from startup',
-	callback = function()
-		vim.cmd('setlocal laststatus=0')
-	end
-})
 -- }}}
 
 -- TREESITTER {{{
@@ -312,97 +311,20 @@ require("indent_blankline").setup {
 
 -- }}}
 
--- STARTUP {{{
-require"startup".setup({
-	-- everything is padded because of signcolumn
-	header = {
-		type = "text",
-		align = "center",
-		title = "header",
-		content = {
-			-- '   ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄    ',
-			-- '   ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄    ',
-			-- '  ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄    ',
-			-- '  ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄    ',
-			-- ' ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰    ',
-			-- ' ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤    ',
-			-- '⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗    ',
-			-- '⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟     ',
-			-- '⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃     ',
-			-- '⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃     ',
-			-- ' ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃      ',
-			-- '  ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁       ',
-			-- '    ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁         ',
-			-- '       ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁            ',
-			-- '          ⠉⠻⣿⣿⡆⣿⡿⠃                ',
-			-- '██████                    ████  ',
-			-- '████  ▓▓                ▓▓  ██  ',
-			-- '  ██    ██            ▓▓    ██  ',
-			-- '  ██      ██▓▓▓▓████▓▓      ██  ',
-			-- '  ██                        ██  ',
-			-- '  ▓▓                        ██  ',
-			-- '  ▓▓                        ██  ',
-			-- '  ▓▓    ▓▓▓▓          ██    ██  ',
-			-- '  ██░░▒▒    ██      ██  ██  ██  ',
-			-- '  ▓▓██░░░░              ░░░░██  ',
-			-- '    ██▓▓                  ██    ',
-			-- '        ▓▓              ██      ',
-			-- '          ▓▓██▓▓████████░░      ',
-			-- '                        _ ',
-			-- '                       | \\',
-			-- '                       | |',
-			-- '                       | |',
-			-- '  |\\                   | |',
-			-- ' /, ~\\                / / ',
-			-- 'X     `-.....-------./ /  ',
-			-- ' ~-. ~  ~              |  ',
-			-- '    \\             /    |  ',
-			-- '     \\  /_     ___\\   /   ',
-			-- '     | /\\ ~~~~~   \\ |     ',
-			-- '     | | \\        || |    ',
-			-- '     | |\\ \\       || )    ',
-			-- '    (_/ (_/      ((_/     ',
-			' _______                    ____   ___.__         ',
-			' \\      \\ ___._______    ___\\   \\ /   |__| _____  ', 
-			' /   |   <   |  \\__  \\  /    \\   Y   /|  |/     \\ ',
-			'/    |    \\___  |/ __ \\|   |  \\     / |  |  Y Y  \\',
-			'\\____|__  / ____(____  |___|  /\\___/  |__|__|_|  /',
-			'        \\/\\/         \\/     \\/                 \\/ ',
-			-- '    _   __                _    ___         ',
-			-- '   / | / /_  ______ _____| |  / (_)___ ___ ',
-			-- '  /  |/ / / / / __ `/ __ \\ | / / / __ `__ \\',
-			-- ' / /|  / /_/ / /_/ / / / / |/ / / / / / / /',
-			-- '/_/ |_/\\__, /\\__,_/_/ /_/|___/_/_/ /_/ /_/ ',
-			-- '      /____/                               ',
-		},
-		highlight = 'Conditional',
-	},
+local alpha = require'alpha'
+local dashboard = require'alpha.themes.dashboard'
+dashboard.section.header.val = {
+}
+dashboard.section.buttons.val = {
+	dashboard.button( "e", "  New file" , ":ene <BAR> startinsert <CR>"),
+}
+dashboard.section.footer.val = 'Welcome to NyanVim!'
 
-	maps = {
-		type = "mapping",
-		title = "commands",
-		align = "center",
-		content = {
-			{ " File Browser     ",  "Telescope file_browser",           "n" },
-			{ "ﱐ New File     ",      "lua require 'startup'.new_file()", "e" },
-			{ " Config     ",        "e ~/.config/nvim/init.lua",        "c" },
-			{ " Sync Packages     ", "PackerSync",                       "u" },
-			{ " Nyan!     ",         "term nyancat",                     "y" }
-		},
-		highlight = 'Question',
-	},
+dashboard.config.opts.noautocmd = true
 
-	footer = {
-		type = "text",
-		title = "footer",
-		align = "center",
-		content = { "Welcome to NyanVim!   " },
-		highlight = "Normal",
-	},
+vim.cmd[[autocmd User AlphaReady echo 'ready']]
 
-	parts = { "header", "maps", "footer", },
-})
--- }}}
+alpha.setup(dashboard.config)
 
 -- STATUSLINE {{{
 require('lualine').setup {
