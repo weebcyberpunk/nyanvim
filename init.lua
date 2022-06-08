@@ -128,7 +128,7 @@ vim.opt.mouse = "a"
 -- KEYBINDS AND COMMANDS {{{
 vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
-vim.api.nvim_create_user_command('Config', 'e ~/.config/nvim/init.lua', {})
+vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -156,7 +156,7 @@ vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
 if( os.getenv('TMUX') ) then
 	vim.keymap.set("c", "q<CR>", "close<CR>")
 	vim.keymap.set("c", "wq<CR>", "w<CR>:close<CR>")
-	vim.keymap.set("c", "quit<CR>", ":e ~/.config/nvim/init.lua<CR>:%bd<CR>:silent !tmux detach<CR>:intro<CR>")
+	vim.keymap.set("c", "quit<CR>", "%bd<CR>:silent !tmux detach<CR>:Alpha<CR>")
 end
 -- }}}
 
@@ -343,26 +343,26 @@ dashboard.section.header.val = {
 	-- '    ██▓▓                  ██    ',
 	-- '        ▓▓              ██      ',
 	-- '          ▓▓██▓▓████████░░      ',
-	-- '                        _ ',
-	-- '                       | \\',
-	-- '                       | |',
-	-- '                       | |',
-	-- '  |\\                   | |',
-	-- ' /, ~\\                / / ',
-	-- 'X     `-.....-------./ /  ',
-	-- ' ~-. ~  ~              |  ',
-	-- '    \\             /    |  ',
-	-- '     \\  /_     ___\\   /   ',
-	-- '     | /\\ ~~~~~   \\ |     ',
-	-- '     | | \\        || |    ',
-	-- '     | |\\ \\       || )    ',
-	-- '    (_/ (_/      ((_/     ',
-	' _______                    ____   ___.__         ',
-	' \\      \\ ___._______    ___\\   \\ /   |__| _____  ', 
-	' /   |   <   |  \\__  \\  /    \\   Y   /|  |/     \\ ',
-	'/    |    \\___  |/ __ \\|   |  \\     / |  |  Y Y  \\',
-	'\\____|__  / ____(____  |___|  /\\___/  |__|__|_|  /',
-	'        \\/\\/         \\/     \\/                 \\/ ',
+	'                        _ ',
+	'                       | \\',
+	'                       | |',
+	'                       | |',
+	'  |\\                   | |',
+	' /, ~\\                / / ',
+	'X     `-.....-------./ /  ',
+	' ~-. ~  ~              |  ',
+	'    \\             /    |  ',
+	'     \\  /_     ___\\   /   ',
+	'     | /\\ ~~~~~   \\ |     ',
+	'     | | \\        || |    ',
+	'     | |\\ \\       || )    ',
+	'    (_/ (_/      ((_/     ',
+	-- ' _______                    ____   ___.__         ',
+	-- ' \\      \\ ___._______    ___\\   \\ /   |__| _____  ', 
+	-- ' /   |   <   |  \\__  \\  /    \\   Y   /|  |/     \\ ',
+	-- '/    |    \\___  |/ __ \\|   |  \\     / |  |  Y Y  \\',
+	-- '\\____|__  / ____(____  |___|  /\\___/  |__|__|_|  /',
+	-- '        \\/\\/         \\/     \\/                 \\/ ',
 	-- '    _   __                _    ___         ',
 	-- '   / | / /_  ______ _____| |  / (_)___ ___ ',
 	-- '  /  |/ / / / / __ `/ __ \\ | / / / __ `__ \\',
@@ -373,7 +373,7 @@ dashboard.section.header.val = {
 dashboard.section.buttons.val = {
 	dashboard.button("n", " File Browser",  ":Telescope file_browser<CR>"),
 	dashboard.button("e", "ﱐ New File",      ":enew<CR>"),
-	dashboard.button("c", " Config",        ":e ~/.config/nvim/init.lua<CR>"),
+	dashboard.button("c", " Config",        ":cd ~/.config/nvim<CR>:e ~/.config/nvim/init.lua<CR>"),
 	dashboard.button("u", " Sync Packages", ":PackerSync<CR>"),
 	dashboard.button("y", " Nyan!",         ":term nyancat<CR>"),
 }
