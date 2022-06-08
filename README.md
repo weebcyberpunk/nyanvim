@@ -163,8 +163,8 @@ to get used to. Perfect if used with zen mode!
 ## Prettiness
 
 NyanVim is pretty and cute. It features a custom startup screen with
-[startup](https://github.com/startup-nvim/startup.nvim). The ascii is configured
-directed in `init.lua` at the "startup" section. You can uncomment the desired
+[alpha](https://github.com/goolord/alpha-nvim). The ascii is configured directed
+in `init.lua` at the "alpha dashboard" section. You can uncomment the desired
 one or add your own. The colorscheme is
 [catppuccin](https://github.com/catppuccin/nvim) and the statusbar (with Git and
 LSP integration) is the awesome
