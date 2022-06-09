@@ -156,7 +156,7 @@ vim.g.floaterm_keymap_toggle = "<C-t>"
 vim.g.floaterm_keymap_new = "<C-c>n"
 vim.g.floaterm_keymap_next = "<C-c>l"
 vim.g.floaterm_keymap_prev = "<C-c>h"
-vim.keymap.set("n", "<C-c>p", ":FloatermNew python<CR>")
+vim.keymap.set("n", "<C-c>p", ":FloatermNew ptpython<CR>")
 vim.keymap.set("n", "<C-c>f", ":FloatermNew lf<CR>")
 
 -- vim.g.floaterm_width = vim.o.columns
