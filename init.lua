@@ -35,7 +35,6 @@ require('packer').startup(function(use)
 	use 'lewis6991/impatient.nvim'
 	-- formating
 	use 'ervandew/matchem'
-	use 'windwp/nvim-ts-autotag'
 	use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
 	use 'tpope/vim-commentary'
 	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
@@ -100,7 +99,6 @@ require('packer').startup(function(use)
 end)
 
 require('gitsigns').setup()
-require('nvim-ts-autotag').setup()
 --- }}}
 
 -- GREAT DEFAULTS {{{
