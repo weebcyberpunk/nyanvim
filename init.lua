@@ -150,14 +150,6 @@ vim.keymap.set("n", "<C-n>", ":Telescope file_browser<CR>")
 vim.keymap.set("n", "<C-d>", ":Telescope diagnostics<CR>")
 vim.keymap.set("n", "<C-s>", ":Telescope lsp_references<CR>")
 vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
-
--- remap :q so it'll prevent you from leaving NyanVim if you're inside
--- tmux (because I have a tmux server running nvim)
-if( os.getenv('TMUX') ) then
-	vim.keymap.set("c", "q<CR>", "close<CR>")
-	vim.keymap.set("c", "wq<CR>", "w<CR>:close<CR>")
-	vim.keymap.set("c", "quit<CR>", "%bd<CR>:silent !tmux detach<CR>:Alpha<CR>")
-end
 -- }}}
 
 -- TERMINAL {{{
