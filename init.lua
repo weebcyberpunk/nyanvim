@@ -270,7 +270,7 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 
 -- TREESITTER {{{
 require'nvim-treesitter.configs'.setup {
-	ensure_installed = { "c", "python", "rust", "bash", "lua", "html" },
+	ensure_installed = { "c", "python", "rust", "bash", "lua", "html", "markdown" },
 	highlight = { enable = true, },
 }
 -- }}}
