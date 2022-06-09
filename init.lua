@@ -57,6 +57,7 @@ require('packer').startup(function(use)
 	-- visual
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'nvim-lualine/lualine.nvim'
+	use 'norcalli/nvim-colorizer.lua'
 	-- use 'startup-nvim/startup.nvim'
 	use 'goolord/alpha-nvim'
 	-- unfortunatelly I cannot remove this from here
@@ -299,6 +300,16 @@ require("indent_blankline").setup {
 	show_current_context = true,
 }
 
+require('colorizer').setup(nil, {
+	RGB      = true;
+	RRGGBB   = true;
+	names    = true;
+	RRGGBBAA = true;
+	rgb_fn   = true;
+	hsl_fn   = true;
+	css      = true;
+	css_fn   = true;
+})
 -- }}}
 
 -- ALPHA DASHBOARD {{{
