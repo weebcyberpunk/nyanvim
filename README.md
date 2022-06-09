@@ -186,7 +186,9 @@ Other plugins featured in NyanVim are:
   `<leader>tm`, makes creating ascii tables much, much easy.  
 - [Commentary](https://github.com/tpope/vim-commentary): Another tpope's
   VimScript masterpiece, creates extremally useful normal-mode keybinds to
-  comment in and out lines.
+  comment in and out lines.  
+- [Colorizer](https://github.com/norcalli/nvim-colorizer.lua): Highlight the
+  background of colors like "Blue" or #ffffff.  
 
 ## Keybinds
 
