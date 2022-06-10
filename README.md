@@ -10,6 +10,7 @@ Current features:
 - Autocomplete.  
 - Better highlight with TreeSitter.  
 - Git integration.  
+- Tests integration.  
 - General IDE features: auto-closing brackets and HTML tags, indent help, etc.  
 - Easy terminal management with support for multiple terminals running at the
   same time, inside NeoVim.  
@@ -101,6 +102,12 @@ Git integration is done three times:
 - [Telescope Git files](https://github.com/nvim-telescope/telescope.nvim):
   Telescope is a filer plugin that happens to have a mode to show Git tracked
   files. This mode is accessible in NyanVim with the `C-f` keybind.
+
+## Running tests
+
+Testing is done with the awesome
+[Dispatch](https://github.com/tpope/vim-dispatch). You can use `:Make` or
+`:Dispatch` to launch it.
 
 ## General IDE features:
 
