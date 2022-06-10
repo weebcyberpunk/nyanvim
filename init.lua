@@ -45,6 +45,8 @@ require('packer').startup(function(use)
 	-- git integration
 	use  'lewis6991/gitsigns.nvim'
 	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
+	-- the increadible dispatch.vim
+	use { 'tpope/vim-dispatch', opt = true, cmd = { 'Make', 'Dispatch' } }
 	-- make terminal great again
 	use { 'voldikss/vim-floaterm', opt = true, keys = { '<C-t>', '<C-c>n', }, cmd = { 'FloatermNew', 'FloatermToggle' }, config = function()
 		vim.cmd('hi FloatermBorder guibg=NONE')
