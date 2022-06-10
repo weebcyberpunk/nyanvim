@@ -378,7 +378,7 @@ dashboard.section.buttons.val = {
 	dashboard.button("e", "ﱐ New File",      ":enew<CR>"),
 	dashboard.button("c", " Config",        ":cd ~/.config/nvim<CR>:e ~/.config/nvim/init.lua<CR>"),
 	dashboard.button("u", " Sync Packages", ":PackerSync<CR>"),
-	dashboard.button("y", " Nyan!",         ":term nyancat<CR>"),
+	dashboard.button("y", " Nyan!",         ":term<CR>:set nonu<CR>:set nornu<CR>:setlocal signcolumn=no<CR>anyancat<CR>"),
 }
 dashboard.section.footer.val = 'Welcome to NyanVim!'
 
