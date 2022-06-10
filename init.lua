@@ -216,7 +216,6 @@ local buf_settings = vim.api.nvim_create_augroup('buf_settings', {clear = true})
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 	pattern = {
 		'*.md',
-		'*.html',
 	},
 	group = buf_settings,
 	desc = 'Docs auto setting',
