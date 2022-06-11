@@ -37,6 +37,7 @@ require('packer').startup(function(use)
 	use 'ervandew/matchem'
 	use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
 	use 'tpope/vim-commentary'
+	use 'tpope/vim-surround'
 	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
 	-- files and filers
 	use 'nvim-telescope/telescope.nvim'
