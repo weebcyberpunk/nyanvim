@@ -82,6 +82,7 @@ require('packer').startup(function(use)
 	}
 	use 'nvim-treesitter/nvim-treesitter'
 	-- lsp, completion and all that modern stuff
+	use 'folke/trouble.nvim'
 	use 'simrat39/rust-tools.nvim'
 	use 'p00f/clangd_extensions.nvim'
 	use 'neovim/nvim-lspconfig'
@@ -147,9 +148,9 @@ vim.keymap.set("n", ";mitc", ":r ~/.config/nvim/snippets/mit.c<CR>j :r ! date +'
 vim.keymap.set("n", ";mits", ":-1r ~/.config/nvim/snippets/mit.sh<CR>j :r ! date +'\\%Y'<CR>kJJ")
 vim.keymap.set("n", ";mitt", ":-1r ~/.config/nvim/snippets/mit.txt<CR>:r ! date +'\\%Y'<CR>kJJ")
 
--- telescope
+-- all modern stuff
 vim.keymap.set("n", "<C-n>", ":Telescope file_browser<CR>")
-vim.keymap.set("n", "<C-d>", ":Telescope diagnostics<CR>")
+vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 vim.keymap.set("n", "<C-s>", ":Telescope lsp_references<CR>")
 vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
 -- }}}
@@ -176,7 +177,6 @@ local actions = require("telescope.actions")
 require('telescope').setup({
 	defaults = {
 		prompt_prefix = ': ',
-		-- selection_caret = ' ',
 		preview = { hide_on_startup = true, },
 		mappings = {
 			i = {
@@ -188,7 +188,6 @@ require('telescope').setup({
 	},
 	pickers = {
 		lsp_references = { theme = 'ivy', layout_config = { height = 0.7, }, },
-		diagnostics = { theme = 'ivy', layout_config = { height = 0.7, }, },
 		git_files = { theme = 'ivy', layout_config = { height = 0.7, }, },
 	},
 	extensions = {
@@ -209,6 +208,12 @@ require('telescope').setup({
 })
 
 require('telescope').load_extension('file_browser')
+-- }}}
+
+-- TROUBLE {{{
+require('trouble').setup({
+	auto_close = true,
+})
 -- }}}
 
 -- AUTOCMD {{{
