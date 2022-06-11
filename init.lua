@@ -249,7 +249,8 @@ require('packer').startup(function(use)
 	-- }}}
 
 	-- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
-	use { 'folke/trouble.nvim', opt=true, cmd = { 'TroubleToggle', 'Trouble' }, keys = '<C-d>', config = function()
+	use { 'folke/trouble.nvim', keys = { '<C-d>', }, config = function()
+		vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 		require('trouble').setup({
 			auto_close = true,
 		})
@@ -321,7 +322,6 @@ vim.keymap.set("n", ";mitt", ":-1r ~/.config/nvim/snippets/mit.txt<CR>:r ! date 
 
 -- all modern stuff
 vim.keymap.set("n", "<C-n>", ":Telescope file_browser<CR>")
-vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 vim.keymap.set("n", "<C-s>", ":Telescope lsp_references<CR>")
 vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
 -- }}}
