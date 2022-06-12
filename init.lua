@@ -94,20 +94,14 @@ require('packer').startup(function(use)
 	-- }}}
 
 	-- TERMINAL AND TESTS {{{
-	use { 'voldikss/vim-floaterm', opt = true, keys = { '<C-t>', '<C-c>n', }, cmd = { 'FloatermNew', 'FloatermToggle' }, config = function()
-		vim.g.floaterm_keymap_toggle = "<C-t>"
-		vim.g.floaterm_keymap_new = "<C-c>n"
-		vim.g.floaterm_keymap_next = "<C-c>l"
-		vim.g.floaterm_keymap_prev = "<C-c>h"
-		vim.keymap.set("n", "<C-c>p", ":FloatermNew ptpython<CR>")
-		vim.keymap.set("n", "<C-c>f", ":FloatermNew lf<CR>")
-
+	use { 'voldikss/vim-floaterm', opt = true, keys = { '<C-t>', '<C-c>n', }, cmd = { 'FloatermNew', 'FloatermToggle' }, setup = function()
 		-- vim.g.floaterm_width = vim.o.columns
 		vim.g.floaterm_width = 0.99
 		vim.g.floaterm_height = 0.7
 		vim.g.floaterm_position = "bottom"
 		vim.g.floaterm_title = "Terminal $1"
 		vim.g.floaterm_borderchars = "─   ──  "
+	end, config = function()
 		vim.cmd('hi FloatermBorder guibg=NONE')
 	end, 
 	}
@@ -249,8 +243,7 @@ require('packer').startup(function(use)
 	-- }}}
 
 	-- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
-	use { 'folke/trouble.nvim', keys = { '<C-d>', }, config = function()
-		vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
+	use { 'folke/trouble.nvim', opt = true, keys = { '<C-d>', }, config = function()
 		require('trouble').setup({
 			auto_close = true,
 		})
@@ -321,9 +314,18 @@ vim.keymap.set("n", ";mits", ":-1r ~/.config/nvim/snippets/mit.sh<CR>j :r ! date
 vim.keymap.set("n", ";mitt", ":-1r ~/.config/nvim/snippets/mit.txt<CR>:r ! date +'\\%Y'<CR>kJJ")
 
 -- all modern stuff
+vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 vim.keymap.set("n", "<C-n>", ":Telescope file_browser<CR>")
 vim.keymap.set("n", "<C-s>", ":Telescope lsp_references<CR>")
 vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
+
+-- term
+vim.g.floaterm_keymap_toggle = "<C-t>"
+vim.g.floaterm_keymap_new = "<C-c>n"
+vim.g.floaterm_keymap_next = "<C-c>l"
+vim.g.floaterm_keymap_prev = "<C-c>h"
+vim.keymap.set("n", "<C-c>p", ":FloatermNew python<CR>")
+vim.keymap.set("n", "<C-c>f", ":FloatermNew lf<CR>")
 -- }}}
 
 -- AUTOCMD {{{
