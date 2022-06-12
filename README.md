@@ -56,7 +56,8 @@ the language server installed on your machine. It's easy to add support for
 other server, just adding one line in the config. Some keybinds are defined for
 LSP-related things:
 
-- `C-d`: See buffer diagnostics on Telescope.  
+- `C-d`: See workspace diagnostics with
+  [Trouble](https://github/folke/trouble.nvim)  
 - `C-s`: Find references to whatever is under the cursor.  
 
 Autocomplete is done with cmp. Defaults should work well.  
@@ -209,11 +210,11 @@ Just a few keybinds are remapped:
 - `si`: Splits vertically.  
 - `su`: Splits horizontally.  
 
-Telescope keybinds:  
-- `C-n`: Opens file browser.  
-- `C-d`: Opens diagnostics.  
-- `C-s`: Opens references.  
-- `C-f`: Opens Git filer.  
+Common keybinds:  
+- `C-n`: Opens Telescope file browser.  
+- `C-d`: Opens Trouble diagnostics.  
+- `C-s`: Opens Telescope references.  
+- `C-f`: Opens Telescope Git filer.  
 
 Terminal keybinds:  
 - `C-t`: Toggles the terminal. If no terminal running, creates a new one.  
