@@ -235,7 +235,7 @@ require('packer').startup(function(use)
 	-- TREESITTER {{{
 	use { 'nvim-treesitter/nvim-treesitter', config = function()
 		require'nvim-treesitter.configs'.setup {
-			ensure_installed = { "c", "python", "rust", "bash", "lua", "html", "markdown" },
+			ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown" },
 			highlight = { enable = true, },
 		}
 	end,

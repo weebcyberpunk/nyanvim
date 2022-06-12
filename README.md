@@ -11,7 +11,7 @@ Current features:
 - Better highlight with TreeSitter.  
 - Git integration.  
 - Tests integration.  
-- General IDE features: auto-closing brackets and HTML tags, indent help, etc.  
+- General IDE features: auto-closing brackets, indent help, etc.  
 - Easy terminal management with support for multiple terminals running at the
   same time, inside NeoVim.  
 - Zen and pencil mode for writing documents.  
@@ -85,7 +85,7 @@ syntax highlighting inside NyanVim. Parsers are language-specific, and you can
 add more adding the parser name to the array in the following line inside
 TreeSitter configs on `init.lua`:
 
-	ensure_installed = { "c", "python", "rust", "bash", "lua", "html", "markdown" },
+	ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown" },
 
 ## Git integration
 
@@ -117,8 +117,6 @@ General "must-have" IDE features:
 
 - [Matchem](https://github.com/ervandew/matchem): The only auto-close plugin
   that did not failed with me. Written in VimScript by ervandew.  
-- [TS Autotag](https://github.com/windwp/nvim-ts-autotag): Auto-close HTML tags.
-  Needs the HTML TreeSitter parser to work (installed by default in NyanVim).  
 - [Indent Blankline](https://github.com/lukas-reineke/indent-blankline.nvim):
   Plugin to show indentation helps. *JuSt LiKe Vs CoDe*.  
 
@@ -164,7 +162,7 @@ windows. To toggle it, simply `:ZenMode`.
 
 Also, NyanVim uses the amazing [Vim
 Pencil](https://github.com/preservim/vim-pencil) plugin to provide automagically
-wrapping on Markdown, HTML, Groff and whatever document you toggle the plugin
+wrapping on Markdown, Groff and whatever document you toggle the plugin
 (with `:HardPencil` and other variations, see `:h vim-pencil`). Needs some time
 to get used to. Perfect if used with zen mode!
 
