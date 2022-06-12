@@ -90,7 +90,6 @@ TreeSitter configs on `init.lua`:
 ## Git integration
 
 ![Fugitive Git wrapper](share/fugitive.png)
-![Git Signs](share/gitsigns.png)  
 
 Git integration is done three times:
 
@@ -105,6 +104,8 @@ Git integration is done three times:
   files. This mode is accessible in NyanVim with the `C-f` keybind.
 
 ## Running tests
+
+![Dispatch](share/dispatch.png)
 
 Testing is done with the awesome
 [Dispatch](https://github.com/tpope/vim-dispatch). You can use `:Make` or
@@ -124,7 +125,6 @@ General "must-have" IDE features:
 ### File browsing
 
 ![Telescope File Browser](share/filebrowse.png)
-![Telescope Git](share/telescopegit.png)  
 
 For file browsing, NyanVim uses the [file
 browser](https://github.com/nvim-telescope/telescope-file-browser.nvim)
