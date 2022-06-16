@@ -243,7 +243,7 @@ require('packer').startup(function(use)
 	-- }}}
 
 	-- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
-	use { 'folke/trouble.nvim', opt = true, keys = { '<C-d>', }, config = function()
+	use { 'folke/trouble.nvim', config = function()
 		require('trouble').setup({
 			auto_close = true,
 		})
