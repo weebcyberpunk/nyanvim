@@ -42,9 +42,8 @@ require('packer').startup(function(use)
 	-- }}}
 
 	-- FILES AND FILERS {{{
-	use 'nvim-lua/plenary.nvim' -- this is dependency. DON'T REMOVE UNLESS YOU KNOW WHAT YOU'RE DOING!
 	use 'nvim-telescope/telescope-file-browser.nvim'
-	use { 'nvim-telescope/telescope.nvim', config = function()
+	use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim', config = function()
 		local fb_actions = require "telescope".extensions.file_browser.actions
 		local actions = require("telescope.actions")
 		require('telescope').setup({
@@ -91,6 +90,15 @@ require('packer').startup(function(use)
 	end,
 	}
 	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
+	use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim', config = function()
+		local neogit = require('neogit')
+		neogit.setup({
+			disable_commit_confirmation = true,
+			disable_builtin_notifications = true,
+			kind = 'vsplit',
+		})
+	end,
+	}
 	-- }}}
 
 	-- TERMINAL AND TESTS {{{
@@ -383,6 +391,19 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 	desc = 'Remove t from formatoptions from scripting langs',
 	callback = function()
 		vim.opt.formatoptions = vim.opt.formatoptions - 't'
+	end
+})
+
+vim.api.nvim_create_autocmd({'FileType'}, {
+	pattern = {
+		'fugitive',
+		'gitcommit',
+	},
+	group = buf_settings,
+	desc = 'Clean screen on fugitive windows',
+	callback = function()
+		vim.wo.relativenumber = false
+		vim.wo.number = false
 	end
 })
 -- }}}
