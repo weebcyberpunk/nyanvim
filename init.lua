@@ -90,15 +90,6 @@ require('packer').startup(function(use)
 	end,
 	}
 	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
-	use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim', config = function()
-		local neogit = require('neogit')
-		neogit.setup({
-			disable_commit_confirmation = true,
-			disable_builtin_notifications = true,
-			kind = 'vsplit',
-		})
-	end,
-	}
 	-- }}}
 
 	-- TERMINAL AND TESTS {{{
@@ -398,9 +389,11 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 	pattern = {
 		'fugitive',
 		'gitcommit',
+		'git',
+		'qf',
 	},
 	group = buf_settings,
-	desc = 'Clean screen on fugitive windows',
+	desc = 'Clean screen on some windows',
 	callback = function()
 		vim.wo.relativenumber = false
 		vim.wo.number = false
