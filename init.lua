@@ -27,7 +27,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-require('packer').startup(function(use)
+require('packer').startup({function(use)
 	use 'wbthomason/packer.nvim'
 
 	-- GOTTA GO FAST!
@@ -268,7 +268,12 @@ require('packer').startup(function(use)
 	if packer_bootstrap then
 		require('packer').sync()
 	end
-end)
+end,
+config = {
+	display = {
+		open_fn = require('packer.util').float,
+	}
+}})
 
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
