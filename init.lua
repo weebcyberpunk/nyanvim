@@ -59,13 +59,13 @@ require('packer').startup({function(use)
 				},
 			},
 			pickers = {
-				lsp_references = { theme = 'ivy', layout_config = { height = 0.7, }, },
-				git_files = { theme = 'ivy', layout_config = { height = 0.7, }, },
+				lsp_references = { theme = 'ivy', layout_config = { height = 0.5, }, },
+				git_files = { theme = 'ivy', layout_config = { height = 0.5, }, },
 			},
 			extensions = {
 				file_browser = {
 					theme = 'ivy',
-					layout_config = { height = 0.7, },
+					layout_config = { height = 0.5, },
 					hidden = true,
 					mappings = {
 						["i"] = {
@@ -96,7 +96,7 @@ require('packer').startup({function(use)
 	use { 'voldikss/vim-floaterm', opt = true, keys = { '<C-t>', '<C-c>n', }, cmd = { 'FloatermNew', 'FloatermToggle' }, setup = function()
 		-- vim.g.floaterm_width = vim.o.columns
 		vim.g.floaterm_width = 0.99
-		vim.g.floaterm_height = 0.7
+		vim.g.floaterm_height = 0.5
 		vim.g.floaterm_position = "bottom"
 		vim.g.floaterm_title = "Terminal $1"
 		vim.g.floaterm_borderchars = "─   ──  "
