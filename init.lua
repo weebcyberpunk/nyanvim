@@ -27,7 +27,7 @@ else
 	require('impatient')
 end
 
-require('packer').startup({function(use)
+require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 
 	-- GOTTA GO FAST!
@@ -41,46 +41,18 @@ require('packer').startup({function(use)
 	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
 	-- }}}
 
-	-- FILES AND FILERS {{{
-	use 'nvim-telescope/telescope-file-browser.nvim'
-	use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim', config = function()
-		local fb_actions = require "telescope".extensions.file_browser.actions
-		local actions = require("telescope.actions")
-		require('telescope').setup({
-			defaults = {
-				prompt_prefix = ': ',
-				preview = { hide_on_startup = true, },
-				mappings = {
-					i = {
-						["<esc>"] = actions.close,
-						["<Tab>"] = actions.move_selection_next,
-						["<S-Tab>"] = actions.move_selection_previous,
-					},
-				},
-			},
-			pickers = {
-				lsp_references = { theme = 'ivy', layout_config = { height = 0.5, }, },
-				git_files = { theme = 'ivy', layout_config = { height = 0.5, }, },
-			},
-			extensions = {
-				file_browser = {
-					theme = 'ivy',
-					layout_config = { height = 0.5, },
-					hidden = true,
-					mappings = {
-						["i"] = {
-							["<C-a>"] = fb_actions.toggle_hidden,
-							["<Space>"] = fb_actions.change_cwd,
-							["<C-h>"] = fb_actions.goto_parent_dir,
-							["<C-l>"] = fb_actions.change_cwd,
-						},
-					},
-				},
-			},
-		})
+	-- NERDTREE {{{
+	use { 'preservim/nerdtree', config = function()
+		vim.g.NERDTreeChDirMode = 3
+		vim.g.NERDTreeRespectWildIgnore = 1
+		vim.g.NERDTreeWinPos = 'right'
+		vim.g.NERDTreeWinSize = 20
+		vim.g.NERDTreeMinimalUI = 1
 
-		require('telescope').load_extension('file_browser')
-	end, 
+		vim.g.NERDTreeMapChangeRoot = 'l'
+		vim.g.NERDTreeMapUpdir = 'h'
+		vim.cmd("autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\\d\\+' && bufname('%') !~ 'NERD_tree_\\d\\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute \"normal! \\<C-W>w\" | execute 'buffer'.buf | endif")
+	end,
 	}
 	-- }}}
 
@@ -94,15 +66,9 @@ require('packer').startup({function(use)
 
 	-- TERMINAL AND TESTS {{{
 	use { 'voldikss/vim-floaterm', opt = true, keys = { '<C-t>', '<C-c>n', }, cmd = { 'FloatermNew', 'FloatermToggle' }, setup = function()
-		-- vim.g.floaterm_width = vim.o.columns
-		vim.g.floaterm_width = 0.99
-		vim.g.floaterm_height = 0.5
-		vim.g.floaterm_position = "bottom"
-		vim.g.floaterm_title = "Terminal $1"
-		vim.g.floaterm_borderchars = "─   ──  "
-	end, config = function()
-		vim.cmd('hi FloatermBorder guibg=NONE')
-	end, 
+		vim.g.floaterm_height = 0.4
+		vim.g.floaterm_wintype = 'split'
+	end 
 	}
 	use { 'tpope/vim-dispatch', opt = true, cmd = { 'Make', 'Dispatch' } }
 	-- }}}
@@ -111,105 +77,6 @@ require('packer').startup({function(use)
 	use { 'catppuccin/nvim', as = 'catppuccin', }
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'norcalli/nvim-colorizer.lua'
-	-- }}}
-
-	-- LUALINE {{{
-	use { 'nvim-lualine/lualine.nvim', config = function()
-		require('lualine').setup {
-		sections = {
-			lualine_a = {'mode'},
-			lualine_b = {'filename'},
-			lualine_c = {'diagnostics'},
-
-			lualine_x = {'branch'},
-			lualine_y = {'filetype'},
-			lualine_z = {'location'}
-			},
-		options = {
-			theme = 'auto',
-			globalstatus = true
-			},
-		}
-	end,
-	}
-	-- }}}
-
-	-- ALPHA DASHBOARD {{{
-	use { 'goolord/alpha-nvim', config = function()
-		local alpha = require'alpha'
-		local dashboard = require'alpha.themes.dashboard'
-		dashboard.section.header.val = {
-			-- '   ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄    ',
-			-- '   ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄    ',
-			-- '  ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄    ',
-			-- '  ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄    ',
-			-- ' ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰    ',
-			-- ' ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤    ',
-			-- '⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗    ',
-			-- '⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟     ',
-			-- '⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃     ',
-			-- '⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃     ',
-			-- ' ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃      ',
-			-- '  ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁       ',
-			-- '    ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁         ',
-			-- '       ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁            ',
-			-- '          ⠉⠻⣿⣿⡆⣿⡿⠃                ',
-			-- '██████                    ████  ',
-			-- '████  ▓▓                ▓▓  ██  ',
-			-- '  ██    ██            ▓▓    ██  ',
-			-- '  ██      ██▓▓▓▓████▓▓      ██  ',
-			-- '  ██                        ██  ',
-			-- '  ▓▓                        ██  ',
-			-- '  ▓▓                        ██  ',
-			-- '  ▓▓    ▓▓▓▓          ██    ██  ',
-			-- '  ██░░▒▒    ██      ██  ██  ██  ',
-			-- '  ▓▓██░░░░              ░░░░██  ',
-			-- '    ██▓▓                  ██    ',
-			-- '        ▓▓              ██      ',
-			-- '          ▓▓██▓▓████████░░      ',
-			'                        _ ',
-			'                       | \\',
-			'                       | |',
-			'                       | |',
-			'  |\\                   | |',
-			' /, ~\\                / / ',
-			'X     `-.....-------./ /  ',
-			' ~-. ~  ~              |  ',
-			'    \\             /    |  ',
-			'     \\  /_     ___\\   /   ',
-			'     | /\\ ~~~~~   \\ |     ',
-			'     | | \\        || |    ',
-			'     | |\\ \\       || )    ',
-			'    (_/ (_/      ((_/     ',
-			-- ' _______                    ____   ___.__         ',
-			-- ' \\      \\ ___._______    ___\\   \\ /   |__| _____  ', 
-			-- ' /   |   <   |  \\__  \\  /    \\   Y   /|  |/     \\ ',
-			-- '/    |    \\___  |/ __ \\|   |  \\     / |  |  Y Y  \\',
-			-- '\\____|__  / ____(____  |___|  /\\___/  |__|__|_|  /',
-			-- '        \\/\\/         \\/     \\/                 \\/ ',
-			-- '    _   __                _    ___         ',
-			-- '   / | / /_  ______ _____| |  / (_)___ ___ ',
-			-- '  /  |/ / / / / __ `/ __ \\ | / / / __ `__ \\',
-			-- ' / /|  / /_/ / /_/ / / / / |/ / / / / / / /',
-			-- '/_/ |_/\\__, /\\__,_/_/ /_/|___/_/_/ /_/ /_/ ',
-			-- '      /____/                               ',
-		}
-		dashboard.section.buttons.val = {
-			dashboard.button("n", " File Browser",  ":Telescope file_browser<CR>"),
-			dashboard.button("e", "ﱐ New File",      ":enew<CR>"),
-			dashboard.button("c", " Config",        ":cd ~/.config/nvim<CR>:e ~/.config/nvim/init.lua<CR>"),
-			dashboard.button("u", " Sync Packages", ":PackerSync<CR>"),
-			dashboard.button("y", " Nyan!",         ":term<CR>:set nonu<CR>:set nornu<CR>:setlocal signcolumn=no<CR>anyancat<CR>"),
-		}
-		dashboard.section.footer.val = 'Welcome to NyanVim!'
-
-		dashboard.config.opts.noautocmd = true
-
-		vim.cmd[[autocmd User AlphaReady echo 'ready']]
-
-		alpha.setup(dashboard.config)
-	end,
-	}
 	-- }}}
 
 	-- ZEN MODE {{{
@@ -262,18 +129,12 @@ require('packer').startup({function(use)
 
 	-- tetris
 	use { 'alec-gibson/nvim-tetris', opt = true, cmd = 'Tetris' }
-	-- Finally, the devicons (for safety is the least to be loaded)
-	use 'kyazdani42/nvim-web-devicons'
 
 	if packer_bootstrap then
 		require('packer').sync()
 	end
-end,
-config = {
-	display = {
-		open_fn = require('packer.util').float,
-	}
-}})
+end
+)
 
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
@@ -293,7 +154,6 @@ vim.opt.splitright = true
 vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.laststatus = 3
 vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
-vim.opt.showmode = false -- this is only done because the mode is shown in lualine and in the cursor itself
 vim.opt.mouse = "a"
 -- }}}
 
@@ -309,6 +169,7 @@ vim.keymap.set("n", "<C-K>", "<C-W><C-K>")
 vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
 vim.keymap.set("n", "si", ":vsp<CR>")
 vim.keymap.set("n", "su", ":sp<CR>")
+vim.keymap.set("n", "<C-n>", ":NERDTreeToggle<CR>")
 
 -- snippets
 vim.keymap.set("n", ";c", ":-1r ~/.config/nvim/snippets/skeleton.c<CR>7j8l :-1r ! date +'\\%b \\%d, \\%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>\"aph2xl")
@@ -319,9 +180,6 @@ vim.keymap.set("n", ";mitt", ":-1r ~/.config/nvim/snippets/mit.txt<CR>:r ! date 
 
 -- all modern stuff
 vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
-vim.keymap.set("n", "<C-n>", ":Telescope file_browser<CR>")
-vim.keymap.set("n", "<C-s>", ":Telescope lsp_references<CR>")
-vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
 
 -- term
 vim.g.floaterm_keymap_toggle = "<C-t>"
@@ -329,7 +187,6 @@ vim.g.floaterm_keymap_new = "<C-c>n"
 vim.g.floaterm_keymap_next = "<C-c>l"
 vim.g.floaterm_keymap_prev = "<C-c>h"
 vim.keymap.set("n", "<C-c>p", ":FloatermNew python<CR>")
-vim.keymap.set("n", "<C-c>f", ":FloatermNew lf<CR>")
 -- }}}
 
 -- AUTOCMD {{{
@@ -410,12 +267,15 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		'gitcommit',
 		'git',
 		'qf',
+		'floaterm',
+		'nerdtree',
 	},
 	group = win_settings,
 	desc = 'Clean screen on some windows',
 	callback = function()
 		vim.wo.relativenumber = false
 		vim.wo.number = false
+		vim.wo.signcolumn = 'no'
 	end
 })
 -- }}}
