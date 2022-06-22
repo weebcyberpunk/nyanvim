@@ -139,7 +139,7 @@ end
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
 vim.opt.foldmethod = "marker"
-vim.opt.signcolumn = "yes:2"
+vim.opt.signcolumn = "yes:1"
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
