@@ -161,7 +161,7 @@ vim.opt.mouse = "a"
 vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
-vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=\'yes:1\'', {})
+vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=yes:1', {})
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
