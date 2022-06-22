@@ -334,15 +334,28 @@ vim.keymap.set("n", "<C-c>f", ":FloatermNew lf<CR>")
 
 -- AUTOCMD {{{
 local buf_settings = vim.api.nvim_create_augroup('buf_settings', {clear = true})
+local win_settings = vim.api.nvim_create_augroup('win_settings', {clear = true})
 
-vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+vim.api.nvim_create_autocmd({'FileType'}, {
 	pattern = {
-		'*.md',
+		'markdown',
 	},
 	group = buf_settings,
-	desc = 'Docs auto setting',
+	desc = 'Markdown auto setting',
 	callback = function()
 		vim.cmd('HardPencil')
+		vim.cmd('setlocal spell')
+	end
+})
+
+vim.api.nvim_create_autocmd({'FileType'}, {
+	pattern = {
+		'gitcommit',
+	},
+	group = buf_settings,
+	desc = 'Commit auto setting',
+	callback = function()
+		vim.cmd('setlocal spell')
 	end
 })
 
@@ -362,6 +375,7 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 	callback = function()
 		vim.bo.filetype = "groff"
 		vim.cmd('HardPencil')
+		vim.cmd('setlocal spell')
 	end
 })
 
@@ -397,7 +411,7 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		'git',
 		'qf',
 	},
-	group = buf_settings,
+	group = win_settings,
 	desc = 'Clean screen on some windows',
 	callback = function()
 		vim.wo.relativenumber = false
