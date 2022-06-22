@@ -29,6 +29,10 @@ snippets that I use to automatically sign my code. Also, mind that the config is
 only one huge Lua file. I try to keep it organized, but it may be difficult to
 find your way inside it.
 
+There's a minimal NeoVim-IDE config with basic autocomplete, lsp, etc, under the
+`minimal` branch. You may want to check it out for a minimalist and versatile
+experience.
+
 ## Installing and Bootstraping
 
 The config file have settings to start a bootstrap process of the [Packer
