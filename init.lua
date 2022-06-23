@@ -291,11 +291,18 @@ catppuccin.setup({
 	},
 	transparent_background = true,
 	term_colors = true,
+	integrations = {
+		indent_blankline = { enabled = true, },
+	},
 })
 vim.g.catppuccin_flavour = "mocha"
 vim.cmd('colorscheme catppuccin')
 
 vim.opt.fillchars = vim.opt.fillchars + { eob = ' ' }
+
+require("indent_blankline").setup {
+	show_current_context = true,
+}
 
 require('colorizer').setup(nil, {
 	RGB      = true;
