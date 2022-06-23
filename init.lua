@@ -64,18 +64,16 @@ require('packer').startup(function(use)
 	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
 	-- }}}
 
-	-- TERMINAL AND TESTS {{{
+	-- TERMINAL {{{
 	use { 'voldikss/vim-floaterm', opt = true, keys = { '<C-t>', '<C-c>n', }, cmd = { 'FloatermNew', 'FloatermToggle' }, setup = function()
 		vim.g.floaterm_height = 0.4
 		vim.g.floaterm_wintype = 'split'
 	end 
 	}
-	use { 'tpope/vim-dispatch', opt = true, cmd = { 'Make', 'Dispatch' } }
 	-- }}}
 
 	-- APPEARANCE AND VISUAL HELPERS {{{
 	use { 'catppuccin/nvim', as = 'catppuccin', }
-	use 'lukas-reineke/indent-blankline.nvim'
 	use 'norcalli/nvim-colorizer.lua'
 	-- }}}
 
@@ -121,7 +119,6 @@ require('packer').startup(function(use)
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
-	use 'hrsh7th/cmp-cmdline'
 	use 'hrsh7th/nvim-cmp'
 	use 'L3MON4D3/LuaSnip'
 	use 'saadparwaiz1/cmp_luasnip'
@@ -162,6 +159,7 @@ vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
 vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=yes:1', {})
+vim.keymap.set("c", "T", "term ")
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -370,14 +368,6 @@ cmp.setup.cmdline('/', {
 	sources = {
 		{ name = 'buffer' }
 	}
-})
-cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = 'path' }
-	}, {
-		{ name = 'cmdline' }
-	})
 })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
