@@ -163,9 +163,9 @@ require('packer').startup(function(use)
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
-				['<C-d>'] = cmp.mapping.scroll_docs(-4),
-				['<C-f'] = cmp.mapping.scroll_docs(4),
-				['<C-g>'] = cmp.mapping.complete(),
+				['<C-k>'] = cmp.mapping.scroll_docs(-4),
+				['<C-j>'] = cmp.mapping.scroll_docs(4),
+				['<C-l>'] = cmp.mapping.complete(),
 				['<C-Space>'] = cmp.mapping.confirm {
 					behavior = cmp.ConfirmBehavior.Replace,
 					select = true,
@@ -176,14 +176,14 @@ require('packer').startup(function(use)
 					else
 						fallback()
 					end
-				end, { 'i', 's' }),
+				end, { 'i', 's', 'c' }),
 				['<S-Tab>'] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item()
 					else
 						fallback()
 					end
-				end, { 'i', 's' }),
+				end, { 'i', 's', 'c' }),
 			}),
 			sources = cmp.config.sources({
 				{ name = 'nvim_lsp' },
@@ -250,7 +250,7 @@ vim.opt.wildmode = "list:full"
 vim.opt.wildignore = { "__pycache__/", "test.txt", "test*.txt", "LICENSE", "a.out", "*.gch", ".SRCINFO", ".git" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.completeopt = {"menu", "menuone", "noselect"}
+vim.opt.completeopt = {"menuone", "noselect"}
 vim.opt.laststatus = 3
 vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 vim.opt.mouse = "a"
