@@ -7,7 +7,7 @@
 --                         _
 --     GG's NeoVim-based  | \
 --       Personal IDE     | |
---                        | |
+--    - minimal edition - | |
 --   |\                   | |
 --  /, ~\                / /
 -- X     `-.....-------./ /
