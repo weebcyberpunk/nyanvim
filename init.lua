@@ -111,6 +111,8 @@ require('packer').startup(function(use)
 	use { 'folke/trouble.nvim', config = function()
 		require('trouble').setup({
 			auto_close = true,
+			icons = false,
+			padding = false,
 		})
 	end,
 	}
