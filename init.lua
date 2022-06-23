@@ -73,8 +73,36 @@ require('packer').startup(function(use)
 	-- }}}
 
 	-- APPEARANCE AND VISUAL HELPERS {{{
-	use { 'catppuccin/nvim', as = 'catppuccin', }
-	use 'norcalli/nvim-colorizer.lua'
+	use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
+		local catppuccin = require('catppuccin')
+		catppuccin.setup({
+			styles = {
+				comments = 'italic',
+				functions = 'italic',
+				keywords = 'NONE',
+				strings = 'NONE',
+				variables = 'NONE',
+			},
+			transparent_background = true,
+			term_colors = true,
+		})
+		vim.g.catppuccin_flavour = "mocha"
+		vim.cmd('colorscheme catppuccin')
+	end
+	}
+	use { 'norcalli/nvim-colorizer.lua', config = function() 
+		require('colorizer').setup(nil, {
+			RGB      = true;
+			RRGGBB   = true;
+			names    = true;
+			RRGGBBAA = true;
+			rgb_fn   = true;
+			hsl_fn   = true;
+			css      = true;
+			css_fn   = true;
+		})
+	end
+	}
 	-- }}}
 
 	-- ZEN MODE {{{
@@ -162,7 +190,7 @@ vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
 vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=yes:1', {})
-vim.keymap.set("c", "T", "term")
+vim.keymap.set("c", "T", "term ")
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -279,34 +307,6 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		vim.wo.number = false
 		vim.wo.signcolumn = 'no'
 	end
-})
--- }}}
-
--- APPEARANCE {{{
-local catppuccin = require('catppuccin')
-catppuccin.setup({
-	styles = {
-		comments = 'italic',
-		functions = 'italic',
-		keywords = 'NONE',
-		strings = 'NONE',
-		variables = 'NONE',
-	},
-	transparent_background = true,
-	term_colors = true,
-})
-vim.g.catppuccin_flavour = "mocha"
-vim.cmd('colorscheme catppuccin')
-
-require('colorizer').setup(nil, {
-	RGB      = true;
-	RRGGBB   = true;
-	names    = true;
-	RRGGBBAA = true;
-	rgb_fn   = true;
-	hsl_fn   = true;
-	css      = true;
-	css_fn   = true;
 })
 -- }}}
 
