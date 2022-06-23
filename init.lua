@@ -108,9 +108,45 @@ require('packer').startup({function(use)
 	-- }}}
 
 	-- APPEARANCE AND VISUAL HELPERS {{{
-	use { 'catppuccin/nvim', as = 'catppuccin', }
-	use 'lukas-reineke/indent-blankline.nvim'
-	use 'norcalli/nvim-colorizer.lua'
+	use { 'catppuccin/nvim', as = 'catppuccin', config = function()
+		local catppuccin = require('catppuccin')
+		catppuccin.setup({
+			styles = {
+				comments = 'italic',
+				functions = 'italic',
+				keywords = 'NONE',
+				strings = 'NONE',
+				variables = 'NONE',
+			},
+			transparent_background = true,
+			term_colors = true,
+			integrations = {
+				indent_blankline = { enabled = true, },
+			},
+		})
+		vim.g.catppuccin_flavour = "mocha"
+		vim.cmd('colorscheme catppuccin')
+	end
+	}
+	use { 'lukas-reineke/indent-blankline.nvim', config = function() 
+		require("indent_blankline").setup {
+			show_current_context = true,
+		}
+	end 
+	}
+	use { 'norcalli/nvim-colorizer.lua', config = function() 
+		require('colorizer').setup(nil, {
+			RGB      = true;
+			RRGGBB   = true;
+			names    = true;
+			RRGGBBAA = true;
+			rgb_fn   = true;
+			hsl_fn   = true;
+			css      = true;
+			css_fn   = true;
+		})
+	end
+	}
 	-- }}}
 
 	-- LUALINE {{{
@@ -417,43 +453,6 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		vim.wo.relativenumber = false
 		vim.wo.number = false
 	end
-})
--- }}}
-
--- APPEARANCE {{{
-local catppuccin = require('catppuccin')
-catppuccin.setup({
-	styles = {
-		comments = 'italic',
-		functions = 'italic',
-		keywords = 'NONE',
-		strings = 'NONE',
-		variables = 'NONE',
-	},
-	transparent_background = true,
-	term_colors = true,
-	integrations = {
-		indent_blankline = { enabled = true, },
-	},
-})
-vim.g.catppuccin_flavour = "mocha"
-vim.cmd('colorscheme catppuccin')
-
-vim.opt.fillchars = vim.opt.fillchars + { eob = ' ' }
-
-require("indent_blankline").setup {
-	show_current_context = true,
-}
-
-require('colorizer').setup(nil, {
-	RGB      = true;
-	RRGGBB   = true;
-	names    = true;
-	RRGGBBAA = true;
-	rgb_fn   = true;
-	hsl_fn   = true;
-	css      = true;
-	css_fn   = true;
 })
 -- }}}
 
