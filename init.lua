@@ -70,7 +70,6 @@ require('packer').startup(function(use)
 		vim.g.floaterm_wintype = 'split'
 	end 
 	}
-	use { 'tpope/vim-dispatch', opt = true, cmd = { 'Make', 'Dispatch' } }
 	-- }}}
 
 	-- APPEARANCE AND VISUAL HELPERS {{{
@@ -163,6 +162,7 @@ vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
 vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=yes:1', {})
+vim.keymap.set("c", "T", "term")
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -297,8 +297,6 @@ catppuccin.setup({
 })
 vim.g.catppuccin_flavour = "mocha"
 vim.cmd('colorscheme catppuccin')
-
-vim.opt.fillchars = vim.opt.fillchars + { eob = ' ' }
 
 require('colorizer').setup(nil, {
 	RGB      = true;
