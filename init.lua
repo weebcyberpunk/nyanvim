@@ -46,12 +46,10 @@ require('packer').startup(function(use)
 		vim.g.NERDTreeChDirMode 	= 3
 		vim.g.NERDTreeWinPos 		= 'right'
 		vim.g.NERDTreeWinSize 		= 20
-		vim.g.NERDTreeWinSizeMax 	= 20
 		vim.g.NERDTreeBookmarksFile 	= '$HOME/.local/share/nvim/nerdtreebookmarks'
 
 		vim.g.NERDTreeRemoveCmd 	= 'rm '
 		vim.g.NERDTreeRemoveDirCmd 	= 'rm -r '
-
 
 		vim.g.NERDTreeQuitOnOpen 		= 1
 		vim.g.NERDTreeShowHidden 		= 1
@@ -380,7 +378,6 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		'git',
 		'qf',
 		'floaterm',
-		'nerdtree',
 	},
 	group = win_settings,
 	desc = 'Clean screen on some windows',
