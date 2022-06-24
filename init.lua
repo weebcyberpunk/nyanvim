@@ -43,15 +43,26 @@ require('packer').startup(function(use)
 
 	-- NERDTREE {{{
 	use { 'preservim/nerdtree', config = function()
-		vim.g.NERDTreeChDirMode = 3
-		vim.g.NERDTreeRespectWildIgnore = 1
-		vim.g.NERDTreeWinPos = 'right'
-		vim.g.NERDTreeWinSize = 20
-		vim.g.NERDTreeMinimalUI = 1
+		vim.g.NERDTreeChDirMode 	= 3
+		vim.g.NERDTreeWinPos 		= 'right'
+		vim.g.NERDTreeWinSize 		= 20
+		vim.g.NERDTreeWinSizeMax 	= 20
+		vim.g.NERDTreeBookmarksFile 	= '$HOME/.local/share/nvim/nerdtreebookmarks'
 
-		vim.g.NERDTreeMapChangeRoot = 'l'
-		vim.g.NERDTreeMapUpdir = 'h'
-		vim.cmd("autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\\d\\+' && bufname('%') !~ 'NERD_tree_\\d\\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute \"normal! \\<C-W>w\" | execute 'buffer'.buf | endif")
+		vim.g.NERDTreeRemoveCmd 	= 'rm '
+		vim.g.NERDTreeRemoveDirCmd 	= 'rm -r '
+
+
+		vim.g.NERDTreeQuitOnOpen 		= 1
+		vim.g.NERDTreeShowHidden 		= 1
+		vim.g.NERDTreeRespectWildIgnore 	= 1
+		vim.g.NERDTreeMinimalUI 		= 1
+		vim.g.NERDTreeMinimalMenu 		= 1
+		vim.g.NERDTreeHighlightCursorline 	= 1
+		vim.g.NERDTreeRespectWildIgnore 	= 1
+
+		vim.g.NERDTreeMapChangeRoot 	= 'l'
+		vim.g.NERDTreeMapUpdir 		= 'h'
 	end,
 	}
 	-- }}}
