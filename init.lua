@@ -50,11 +50,7 @@ require('packer').startup(function(use)
 	-- }}}
 
 	-- TERMINAL AND TESTS {{{
-	use { 'voldikss/vim-floaterm', opt = true, keys = { '<C-t>', '<C-c>n', }, cmd = { 'FloatermNew', 'FloatermToggle' }, setup = function()
-		vim.g.floaterm_height = 0.4
-		vim.g.floaterm_wintype = 'split'
-	end 
-	}
+	use 'tpope/vim-dispatch'
 	-- }}}
 
 	-- APPEARANCE AND VISUAL HELPERS {{{
@@ -280,16 +276,14 @@ vim.keymap.set("n", ";mitt", ":-1r ~/.config/nvim/snippets/mit.txt<CR>:r ! date 
 vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 
 -- term
-vim.g.floaterm_keymap_toggle = "<C-t>"
-vim.g.floaterm_keymap_new = "<C-c>n"
-vim.g.floaterm_keymap_next = "<C-c>l"
-vim.g.floaterm_keymap_prev = "<C-c>h"
-vim.keymap.set("n", "<C-c>p", ":FloatermNew python<CR>")
+vim.keymap.set("n", "<C-p>", ":Start python<CR>")
+vim.keymap.set("n", "<C-t>", ":Start<CR>")
 -- }}}
 
 -- AUTOCMD {{{
 local buf_settings = vim.api.nvim_create_augroup('buf_settings', {clear = true})
 local win_settings = vim.api.nvim_create_augroup('win_settings', {clear = true})
+local term_settings = vim.api.nvim_create_augroup('win_settings', {clear = true})
 
 vim.api.nvim_create_autocmd({'FileType'}, {
 	pattern = {
@@ -365,7 +359,6 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		'gitcommit',
 		'git',
 		'qf',
-		'floaterm',
 	},
 	group = win_settings,
 	desc = 'Clean screen on some windows',
@@ -373,6 +366,28 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		vim.wo.relativenumber = false
 		vim.wo.number = false
 		vim.wo.signcolumn = 'no'
+	end
+})
+
+vim.api.nvim_create_autocmd({'TermEnter'}, {
+	pattern = '*',
+	group = term_settings,
+	desc = 'Clean terminal window',
+	callback = function()
+		vim.wo.relativenumber = false
+		vim.wo.number = false
+		vim.wo.signcolumn = 'no'
+	end
+})
+
+vim.api.nvim_create_autocmd({'TermLeave'}, {
+	pattern = '*',
+	group = term_settings,
+	desc = 'Reset window after terminal',
+	callback = function()
+		vim.wo.relativenumber = true
+		vim.wo.number = true
+		vim.wo.signcolumn = 'yes:1'
 	end
 })
 -- }}}
