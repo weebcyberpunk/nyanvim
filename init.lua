@@ -41,30 +41,6 @@ require('packer').startup(function(use)
 	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
 	-- }}}
 
-	-- NERDTREE {{{
-	use { 'preservim/nerdtree', config = function()
-		vim.g.NERDTreeChDirMode 	= 3
-		vim.g.NERDTreeWinPos 		= 'right'
-		vim.g.NERDTreeWinSize 		= 20
-		vim.g.NERDTreeBookmarksFile 	= '$HOME/.local/share/nvim/nerdtreebookmarks'
-
-		vim.g.NERDTreeRemoveCmd 	= 'rm '
-		vim.g.NERDTreeRemoveDirCmd 	= 'rm -r '
-
-		vim.g.NERDTreeQuitOnOpen 		= 1
-		vim.g.NERDTreeShowHidden 		= 1
-		vim.g.NERDTreeRespectWildIgnore 	= 1
-		vim.g.NERDTreeMinimalUI 		= 1
-		vim.g.NERDTreeMinimalMenu 		= 1
-		vim.g.NERDTreeHighlightCursorline 	= 1
-		vim.g.NERDTreeRespectWildIgnore 	= 1
-
-		vim.g.NERDTreeMapChangeRoot 	= 'l'
-		vim.g.NERDTreeMapUpdir 		= 'h'
-	end,
-	}
-	-- }}}
-
 	-- GIT INTEGRATION {{{
 	use { 'lewis6991/gitsigns.nvim', config = function()
 		require('gitsigns').setup()
@@ -266,6 +242,17 @@ vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 vim.opt.mouse = "a"
 -- }}}
 
+-- NETRW {{{
+
+	vim.g.netrw_banner 		= 0
+	vim.g.netrw_keepdir 		= 0
+	vim.g.netrw_liststyle 		= 3
+	vim.g.netrw_localrmdir 		= 'rm'
+	vim.g.netrw_localrmdiropt 	= '-r'
+	vim.g.netrw_sizestyle 		= 'H'
+	vim.g.netrw_specialsyntax 	= true
+-- }}}
+
 -- KEYBINDS AND COMMANDS {{{
 vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
@@ -280,7 +267,7 @@ vim.keymap.set("n", "<C-K>", "<C-W><C-K>")
 vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
 vim.keymap.set("n", "si", ":vsp<CR>")
 vim.keymap.set("n", "su", ":sp<CR>")
-vim.keymap.set("n", "<C-n>", ":NERDTreeToggle<CR>")
+vim.keymap.set("n", "<C-n>", ":Explore<CR>")
 
 -- snippets
 vim.keymap.set("n", ";c", ":-1r ~/.config/nvim/snippets/skeleton.c<CR>7j8l :-1r ! date +'\\%b \\%d, \\%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>\"aph2xl")
