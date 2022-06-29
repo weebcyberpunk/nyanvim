@@ -349,19 +349,6 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 	end
 })
 
-vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
-	pattern = {
-		'Cargo.toml',
-		'Cargo.lock',
-		'*.rs',
-	},
-	group = buf_settings,
-	desc = 'Rust make settings',
-	callback = function()
-		vim.bo.makeprg = 'cargo'
-	end
-})
-
 vim.api.nvim_create_autocmd({'FileType'}, {
 	pattern = {
 		'python',
