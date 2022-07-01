@@ -298,7 +298,7 @@ vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 -- term and test
 vim.keymap.set("n", "<C-p>", ":Start python<CR>")
 vim.keymap.set("n", "<C-t>", ":Start<CR>")
-vim.keymap.set("n", "<C-x>", ":Dispatch<CR>")
+vim.keymap.set("n", "<C-b>", ":Dispatch<CR>")
 -- }}}
 
 -- AUTOCMD {{{
