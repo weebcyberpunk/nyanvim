@@ -88,7 +88,7 @@ require('packer').startup(function(use)
 
 			},
 		})
-		vim.g.catppuccin_flavour = "mocha"
+		vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
 		vim.cmd('colorscheme catppuccin')
 	end
 	}
@@ -275,6 +275,8 @@ vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
 vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=yes:1', {})
+vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour=\'latte\' | colorscheme catppuccin', {})
+vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour=\'mocha\' | colorscheme catppuccin', {})
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -298,7 +300,7 @@ vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 -- term and test
 vim.keymap.set("n", "<C-p>", ":Start python<CR>")
 vim.keymap.set("n", "<C-t>", ":Start<CR>")
-vim.keymap.set("n", "<C-b>", ":Dispatch<CR>")
+vim.keymap.set("n", "<C-b>", ":Dispatch<CR>:Copen<CR>")
 -- }}}
 
 -- AUTOCMD {{{
