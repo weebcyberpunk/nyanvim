@@ -158,7 +158,6 @@ require('packer').startup(function(use)
 		'hrsh7th/cmp-nvim-lsp',
 		'hrsh7th/cmp-buffer',
 		'hrsh7th/cmp-path',
-		'hrsh7th/cmp-cmdline',
 		'L3MON4D3/LuaSnip',
 		'saadparwaiz1/cmp_luasnip',
 	}, config = function() 
@@ -219,8 +218,6 @@ require('packer').startup(function(use)
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = cmp.config.sources({
 				{ name = 'path' }
-			}, {
-				{ name = 'cmdline' }
 			})
 		})
 
