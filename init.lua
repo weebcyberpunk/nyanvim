@@ -57,6 +57,10 @@ require('packer').startup(function(use)
 	use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
 		-- not load colorscheme on framebuffer
 		if os.getenv("TERM") == "linux" then
+			vim.cmd("hi SignColumn ctermbg=NONE guibg=NONE")
+			vim.cmd("hi Pmenu ctermbg=NONE guibg=NONE ctermfg=Magenta guifg=Magenta")
+			vim.cmd("hi PmenuSel ctermbg=Magenta guibg=Magenta ctermfg=White guifg=White")
+			vim.opt.guicursor = ""
 			return
 		end
 		local catppuccin = require('catppuccin')
@@ -258,7 +262,7 @@ vim.opt.wildmode = "list:full"
 vim.opt.wildignore = { "__pycache__/", "test.txt", "test*.txt", "LICENSE", "a.out", "*.gch", ".SRCINFO", ".git" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.completeopt = {"menuone", "noselect"}
+-- vim.opt.completeopt = {"menuone", "noselect"}
 vim.opt.laststatus = 3
 vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 vim.opt.mouse = "a"
