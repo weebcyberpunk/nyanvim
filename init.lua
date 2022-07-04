@@ -109,6 +109,14 @@ require('packer').startup({function(use)
 
 	-- APPEARANCE AND VISUAL HELPERS {{{
 	use { 'catppuccin/nvim', as = 'catppuccin', config = function()
+		-- not load colorscheme on framebuffer
+		if os.getenv("TERM") == "linux" then
+			vim.cmd("hi SignColumn ctermbg=NONE guibg=NONE")
+			vim.cmd("hi Pmenu ctermbg=NONE guibg=NONE ctermfg=Magenta guifg=Magenta")
+			vim.cmd("hi PmenuSel ctermbg=Magenta guibg=Magenta ctermfg=White guifg=White")
+			vim.opt.guicursor = ""
+			return
+		end
 		local catppuccin = require('catppuccin')
 		catppuccin.setup({
 			styles = {
