@@ -55,6 +55,10 @@ require('packer').startup(function(use)
 
 	-- APPEARANCE AND VISUAL HELPERS {{{
 	use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
+		-- not load colorscheme on framebuffer
+		if os.getenv("TERM") == "linux" then
+			return
+		end
 		local catppuccin = require('catppuccin')
 		catppuccin.setup({
 			styles = {
