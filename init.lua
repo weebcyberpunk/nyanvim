@@ -36,8 +36,6 @@ require('packer').startup(function(use)
 	-- FORMATTING {{{
 	use 'ervandew/matchem'
 	use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
-	use 'tpope/vim-commentary'
-	use 'tpope/vim-surround'
 	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
 	-- }}}
 
@@ -46,11 +44,14 @@ require('packer').startup(function(use)
 		require('gitsigns').setup()
 	end,
 	}
-	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
 	-- }}}
 
-	-- TERMINAL AND TESTS {{{
+	-- TPOPE {{{
 	use 'tpope/vim-dispatch'
+	use 'tpope/vim-commentary'
+	use 'tpope/vim-surround'
+	use 'tpope/vim-eunuch'
+	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
 	-- }}}
 
 	-- APPEARANCE AND VISUAL HELPERS {{{
@@ -226,7 +227,6 @@ require('packer').startup(function(use)
 		require('lspconfig')['rust_analyzer'].setup({capabilities = capabilities})
 		require('lspconfig')['clangd'].setup({capabilities = capabilities, cmd = {
 			'clangd', 
-			'--background-index', 
 			'--clang-tidy', 
 		}})
 -- }}}
