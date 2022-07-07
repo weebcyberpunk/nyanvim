@@ -22,224 +22,224 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-	packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 else
-	require('impatient')
+    require('impatient')
 end
 
 require('packer').startup(function(use)
-	use 'wbthomason/packer.nvim'
+    use 'wbthomason/packer.nvim'
 
-	-- GOTTA GO FAST!
-	use 'lewis6991/impatient.nvim'
+    -- GOTTA GO FAST!
+    use 'lewis6991/impatient.nvim'
 
-	-- FORMATTING {{{
-	use 'ervandew/matchem'
-	use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
-	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
-	-- }}}
+    -- FORMATTING {{{
+    use 'ervandew/matchem'
+    use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
+    use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
+    -- }}}
 
-	-- GIT INTEGRATION {{{
-	use { 'lewis6991/gitsigns.nvim', config = function()
-		require('gitsigns').setup()
-	end,
-	}
-	-- }}}
+    -- GIT INTEGRATION {{{
+    use { 'lewis6991/gitsigns.nvim', config = function()
+        require('gitsigns').setup()
+    end,
+    }
+    -- }}}
 
-	-- TPOPE {{{
-	use 'tpope/vim-dispatch'
-	use 'tpope/vim-commentary'
-	use 'tpope/vim-surround'
-	use 'tpope/vim-eunuch'
-	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
-	-- }}}
+    -- TPOPE {{{
+    use 'tpope/vim-dispatch'
+    use 'tpope/vim-commentary'
+    use 'tpope/vim-surround'
+    use 'tpope/vim-eunuch'
+    use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
+    -- }}}
 
-	-- APPEARANCE AND VISUAL HELPERS {{{
-	use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
-		-- not load colorscheme on framebuffer
-		if os.getenv("TERM") == "linux" then
-			vim.cmd("hi SignColumn ctermbg=NONE guibg=NONE")
-			vim.cmd("hi Pmenu ctermbg=NONE guibg=NONE ctermfg=Magenta guifg=Magenta")
-			vim.cmd("hi PmenuSel ctermbg=Magenta guibg=Magenta ctermfg=White guifg=White")
-			vim.opt.guicursor = ""
-			return
-		end
-		local catppuccin = require('catppuccin')
-		catppuccin.setup({
-			styles = {
-				comments = 'italic',
-				functions = 'italic',
-				keywords = 'NONE',
-				strings = 'NONE',
-				variables = 'NONE',
-			},
-			term_colors = true,
-			integrations = {
-				native_lsp = {
-					enabled = true,
-					virtual_text = {
-						errors = "italic",
-						hints = "italic",
-						warnings = "italic",
-						information = "italic",
-					},
-					underlines = {
-						errors = "underline",
-						hints = "underline",
-						warnings = "underline",
-						information = "underline",
-					},
-				},
-				cmp = true,
-				gitsigns = true,
-				lsp_trouble = true,
-				treesitter = true,
+    -- APPEARANCE AND VISUAL HELPERS {{{
+    use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
+        -- not load colorscheme on framebuffer
+        if os.getenv("TERM") == "linux" then
+            vim.cmd("hi SignColumn ctermbg=NONE guibg=NONE")
+            vim.cmd("hi Pmenu ctermbg=NONE guibg=NONE ctermfg=Magenta guifg=Magenta")
+            vim.cmd("hi PmenuSel ctermbg=Magenta guibg=Magenta ctermfg=White guifg=White")
+            vim.opt.guicursor = ""
+            return
+        end
+        local catppuccin = require('catppuccin')
+        catppuccin.setup({
+            styles = {
+                comments = 'italic',
+                functions = 'italic',
+                keywords = 'NONE',
+                strings = 'NONE',
+                variables = 'NONE',
+            },
+            term_colors = true,
+            integrations = {
+                native_lsp = {
+                    enabled = true,
+                    virtual_text = {
+                        errors = "italic",
+                        hints = "italic",
+                        warnings = "italic",
+                        information = "italic",
+                    },
+                    underlines = {
+                        errors = "underline",
+                        hints = "underline",
+                        warnings = "underline",
+                        information = "underline",
+                    },
+                },
+                cmp = true,
+                gitsigns = true,
+                lsp_trouble = true,
+                treesitter = true,
 
-			},
-		})
-		vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
-		vim.cmd('colorscheme catppuccin')
-	end
-	}
-	use { 'norcalli/nvim-colorizer.lua', config = function() 
-		require('colorizer').setup(nil, {
-			RGB      = true;
-			RRGGBB   = true;
-			names    = true;
-			RRGGBBAA = true;
-			rgb_fn   = true;
-			hsl_fn   = true;
-			css      = true;
-			css_fn   = true;
-		})
-	end
-	}
-	-- }}}
+            },
+        })
+        vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
+        vim.cmd('colorscheme catppuccin')
+    end
+    }
+    use { 'norcalli/nvim-colorizer.lua', config = function() 
+        require('colorizer').setup(nil, {
+            RGB      = true;
+            RRGGBB   = true;
+            names    = true;
+            RRGGBBAA = true;
+            rgb_fn   = true;
+            hsl_fn   = true;
+            css      = true;
+            css_fn   = true;
+        })
+    end
+    }
+    -- }}}
 
-	-- ZEN MODE {{{
-	use { 'folke/zen-mode.nvim', opt = true, cmd = { 'ZenMode' }, config = function()
-		require('zen-mode').setup({
-			window = {
-				backdrop = 1,
-				width = 85,
-				height = 1,
-				options = {
-					signcolumn = "no",
-					number = false,
-					relativenumber = false,
-					list = false,
-				},
-			},
-		})
-	end,
-	}
-	-- }}}
+    -- ZEN MODE {{{
+    use { 'folke/zen-mode.nvim', opt = true, cmd = { 'ZenMode' }, config = function()
+        require('zen-mode').setup({
+            window = {
+                backdrop = 1,
+                width = 85,
+                height = 1,
+                options = {
+                    signcolumn = "no",
+                    number = false,
+                    relativenumber = false,
+                    list = false,
+                },
+            },
+        })
+    end,
+    }
+    -- }}}
 
-	-- TREESITTER {{{
-	use { 'nvim-treesitter/nvim-treesitter', config = function()
-		require'nvim-treesitter.configs'.setup {
-			ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown", "markdown_inline" },
-			highlight = { enable = true, },
-		}
-	end,
-	}
-	-- }}}
+    -- TREESITTER {{{
+    use { 'nvim-treesitter/nvim-treesitter', config = function()
+        require'nvim-treesitter.configs'.setup {
+            ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown", "markdown_inline" },
+            highlight = { enable = true, },
+        }
+    end,
+    }
+    -- }}}
 
-	-- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
-	use { 'folke/trouble.nvim', config = function()
-		require('trouble').setup({
-			auto_close = true,
-			icons = false,
-			padding = false,
-		})
-	end,
-	}
-	use { 'hrsh7th/nvim-cmp', requires = {
-		'neovim/nvim-lspconfig',
-		'hrsh7th/cmp-nvim-lsp',
-		'hrsh7th/cmp-buffer',
-		'hrsh7th/cmp-path',
-		'L3MON4D3/LuaSnip',
-		'saadparwaiz1/cmp_luasnip',
-	}, config = function() 
-		-- LSP AND COMPLETION SETTINGS {{{
-		local cmp = require'cmp'
-		cmp.setup({
-			snippet = {
-				expand = function(args)
-					require('luasnip').lsp_expand(args.body)
-				end,
-			},
-			mapping = cmp.mapping.preset.insert({
-				['<C-k>'] = cmp.mapping.scroll_docs(-4),
-				['<C-j>'] = cmp.mapping.scroll_docs(4),
-				['<C-l>'] = cmp.mapping.complete(),
-				['<C-Space>'] = cmp.mapping.confirm {
-					behavior = cmp.ConfirmBehavior.Replace,
-					select = true,
-				},
-				['<Tab>'] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					else
-						fallback()
-					end
-				end, { 'i', 's', 'c' }),
-				['<S-Tab>'] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					else
-						fallback()
-					end
-				end, { 'i', 's', 'c' }),
-			}),
-			sources = cmp.config.sources({
-				{ name = 'nvim_lsp' },
-				{ name = 'luasnip' },
-			}, {
-				{ name = 'buffer' },
-			}),
-		})
+    -- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
+    use { 'folke/trouble.nvim', config = function()
+        require('trouble').setup({
+            auto_close = true,
+            icons = false,
+            padding = false,
+        })
+    end,
+    }
+    use { 'hrsh7th/nvim-cmp', requires = {
+        'neovim/nvim-lspconfig',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
+    }, config = function() 
+        -- LSP AND COMPLETION SETTINGS {{{
+        local cmp = require'cmp'
+        cmp.setup({
+            snippet = {
+                expand = function(args)
+                    require('luasnip').lsp_expand(args.body)
+                end,
+            },
+            mapping = cmp.mapping.preset.insert({
+                ['<C-k>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-j>'] = cmp.mapping.scroll_docs(4),
+                ['<C-l>'] = cmp.mapping.complete(),
+                ['<C-Space>'] = cmp.mapping.confirm {
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = true,
+                },
+                ['<Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's', 'c' }),
+                ['<S-Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's', 'c' }),
+            }),
+            sources = cmp.config.sources({
+                { name = 'nvim_lsp' },
+                { name = 'luasnip' },
+            }, {
+                { name = 'buffer' },
+            }),
+        })
 
-		cmp.setup.filetype('gitcommit', {
-			sources = cmp.config.sources({
-				{ name = 'cmp_git' },
-			}, {
-				{ name = 'buffer' },
-			})
-		})
+        cmp.setup.filetype('gitcommit', {
+            sources = cmp.config.sources({
+                { name = 'cmp_git' },
+            }, {
+                { name = 'buffer' },
+            })
+        })
 
-		cmp.setup.cmdline('/', {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
-				{ name = 'buffer' }
-			}
-		})
-		cmp.setup.cmdline(':', {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = cmp.config.sources({
-				{ name = 'path' }
-			})
-		})
+        cmp.setup.cmdline('/', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = 'buffer' }
+            }
+        })
+        cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = 'path' }
+            })
+        })
 
-		local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-		require('lspconfig')['pyright'].setup({capabilities = capabilities})
-		require('lspconfig')['rust_analyzer'].setup({capabilities = capabilities})
-		require('lspconfig')['clangd'].setup({capabilities = capabilities, cmd = {
-			'clangd', 
-			'--clang-tidy', 
-		}})
+        local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+        require('lspconfig')['pyright'].setup({capabilities = capabilities})
+        require('lspconfig')['rust_analyzer'].setup({capabilities = capabilities})
+        require('lspconfig')['clangd'].setup({capabilities = capabilities, cmd = {
+            'clangd', 
+            '--clang-tidy', 
+        }})
 -- }}}
-	end
-	}
-	-- }}}
+    end
+    }
+    -- }}}
 
-	-- tetris
-	use { 'alec-gibson/nvim-tetris', opt = true, cmd = 'Tetris' }
+    -- tetris
+    use { 'alec-gibson/nvim-tetris', opt = true, cmd = 'Tetris' }
 
-	if packer_bootstrap then
-		require('packer').sync()
-	end
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end
 )
 
@@ -259,20 +259,21 @@ vim.opt.wildmode = "list:full"
 vim.opt.wildignore = { "__pycache__/", "test.txt", "test*.txt", "LICENSE", "a.out", "*.gch", ".SRCINFO", ".git" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
--- vim.opt.completeopt = {"menuone", "noselect"}
 vim.opt.laststatus = 3
 vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 vim.opt.mouse = "a"
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 -- }}}
 
 -- NETRW {{{
-vim.g.netrw_banner 		= 0
-vim.g.netrw_keepdir 		= 0
-vim.g.netrw_localrmdir 		= 'rm'
-vim.g.netrw_localrmdiropt 	= '-rf'
-vim.g.netrw_sizestyle 		= 'H'
-vim.g.netrw_special_syntax 	= true
-vim.g.netrw_use_errorwindow 	= 0
+vim.g.netrw_banner         = 0
+vim.g.netrw_keepdir         = 0
+vim.g.netrw_localrmdir         = 'rm'
+vim.g.netrw_localrmdiropt     = '-rf'
+vim.g.netrw_sizestyle         = 'H'
+vim.g.netrw_special_syntax     = true
+vim.g.netrw_use_errorwindow     = 0
 -- }}}
 
 -- KEYBINDS AND COMMANDS {{{
@@ -314,95 +315,95 @@ local win_settings = vim.api.nvim_create_augroup('win_settings', {clear = true})
 local term_settings = vim.api.nvim_create_augroup('win_settings', {clear = true})
 
 vim.api.nvim_create_autocmd({'FileType'}, {
-	pattern = {
-		'markdown',
-	},
-	group = buf_settings,
-	desc = 'Markdown auto setting',
-	callback = function()
-		vim.cmd('HardPencil')
-		vim.cmd('setlocal spell')
-	end
+    pattern = {
+        'markdown',
+    },
+    group = buf_settings,
+    desc = 'Markdown auto setting',
+    callback = function()
+        vim.cmd('HardPencil')
+        vim.cmd('setlocal spell')
+    end
 })
 
 vim.api.nvim_create_autocmd({'FileType'}, {
-	pattern = {
-		'gitcommit',
-	},
-	group = buf_settings,
-	desc = 'Commit auto setting',
-	callback = function()
-		vim.cmd('setlocal spell')
-	end
+    pattern = {
+        'gitcommit',
+    },
+    group = buf_settings,
+    desc = 'Commit auto setting',
+    callback = function()
+        vim.cmd('setlocal spell')
+    end
 })
 
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
-	pattern = {
-		'*.ms',
-		'*.1',
-		'*.2',
-		'*.3',
-		'*.4',
-		'*.5',
-		'*.6',
-		'*.7',
-	},
-	group = buf_settings,
-	desc = 'Groff auto setting',
-	callback = function()
-		vim.bo.filetype = "groff"
-		vim.cmd('HardPencil')
-		vim.cmd('setlocal spell')
-	end
+    pattern = {
+        '*.ms',
+        '*.1',
+        '*.2',
+        '*.3',
+        '*.4',
+        '*.5',
+        '*.6',
+        '*.7',
+    },
+    group = buf_settings,
+    desc = 'Groff auto setting',
+    callback = function()
+        vim.bo.filetype = "groff"
+        vim.cmd('HardPencil')
+        vim.cmd('setlocal spell')
+    end
 })
 
 vim.api.nvim_create_autocmd({'FileType'}, {
-	pattern = {
-		'python',
-		'sh',
-	},
-	group = buf_settings,
-	desc = 'Remove t from formatoptions from scripting langs',
-	callback = function()
-		vim.opt.formatoptions = vim.opt.formatoptions - 't'
-	end
+    pattern = {
+        'python',
+        'sh',
+    },
+    group = buf_settings,
+    desc = 'Remove t from formatoptions from scripting langs',
+    callback = function()
+        vim.opt.formatoptions = vim.opt.formatoptions - 't'
+    end
 })
 
 vim.api.nvim_create_autocmd({'FileType'}, {
-	pattern = {
-		'fugitive',
-		'gitcommit',
-		'git',
-		'qf',
-	},
-	group = win_settings,
-	desc = 'Clean screen on some windows',
-	callback = function()
-		vim.wo.relativenumber = false
-		vim.wo.number = false
-		vim.wo.signcolumn = 'no'
-	end
+    pattern = {
+        'fugitive',
+        'gitcommit',
+        'git',
+        'qf',
+    },
+    group = win_settings,
+    desc = 'Clean screen on some windows',
+    callback = function()
+        vim.wo.relativenumber = false
+        vim.wo.number = false
+        vim.wo.signcolumn = 'no'
+    end
 })
 
 vim.api.nvim_create_autocmd({'TermEnter'}, {
-	pattern = '*',
-	group = term_settings,
-	desc = 'Clean terminal window',
-	callback = function()
-		vim.wo.relativenumber = false
-		vim.wo.number = false
-		vim.wo.signcolumn = 'no'
-	end
+    pattern = '*',
+    group = term_settings,
+    desc = 'Clean terminal window',
+    callback = function()
+        vim.wo.relativenumber = false
+        vim.wo.number = false
+        vim.wo.signcolumn = 'no'
+    end
 })
 
 vim.api.nvim_create_autocmd({'TermLeave'}, {
-	pattern = '*',
-	group = term_settings,
-	desc = 'Reset window after terminal',
-	callback = function()
-		vim.wo.relativenumber = true
-		vim.wo.number = true
-		vim.wo.signcolumn = 'yes:1'
-	end
+    pattern = '*',
+    group = term_settings,
+    desc = 'Reset window after terminal',
+    callback = function()
+        vim.wo.relativenumber = true
+        vim.wo.number = true
+        vim.wo.signcolumn = 'yes:1'
+    end
 })
 -- }}}

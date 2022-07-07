@@ -89,7 +89,7 @@ syntax highlighting inside NyanVim. Parsers are language-specific, and you can
 add more adding the parser name to the array in the following line inside
 TreeSitter configs on `init.lua`:
 
-	ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown" },
+    ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown" },
 
 ## Git integration
 
