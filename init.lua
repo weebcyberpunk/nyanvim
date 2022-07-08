@@ -416,6 +416,9 @@ vim.opt.mouse = "a"
 vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
+vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=yes:1', {})
+vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour=\'latte\' | colorscheme catppuccin', {})
+vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour=\'mocha\' | colorscheme catppuccin', {})
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -424,13 +427,6 @@ vim.keymap.set("n", "<C-K>", "<C-W><C-K>")
 vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
 vim.keymap.set("n", "si", ":vsp<CR>")
 vim.keymap.set("n", "su", ":sp<CR>")
-
--- snippets
-vim.keymap.set("n", ";c", ":-1r ~/.config/nvim/snippets/skeleton.c<CR>7j8l :-1r ! date +'\\%b \\%d, \\%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>\"aph2xl")
-vim.keymap.set("n", ";ds", ":-1r ~/.config/nvim/snippets/script-doc.sh<CR>2j8l:r ! date +'\\%b \\%d, \\%Y'<CR>kJjdd")
-vim.keymap.set("n", ";mitc", ":r ~/.config/nvim/snippets/mit.c<CR>j :r ! date +'\\%Y'<CR>kJJ")
-vim.keymap.set("n", ";mits", ":-1r ~/.config/nvim/snippets/mit.sh<CR>j :r ! date +'\\%Y'<CR>kJJ")
-vim.keymap.set("n", ";mitt", ":-1r ~/.config/nvim/snippets/mit.txt<CR>:r ! date +'\\%Y'<CR>kJJ")
 
 -- all modern stuff
 vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
