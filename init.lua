@@ -420,6 +420,12 @@ vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | 
 vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour=\'latte\' | colorscheme catppuccin', {})
 vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour=\'mocha\' | colorscheme catppuccin', {})
 
+-- MIT LICENSE
+vim.api.nvim_create_user_command('Mit', 'source ~/.config/nvim/snippets/mit.vim', {})
+vim.api.nvim_create_user_command('Mitc', 'source ~/.config/nvim/snippets/mitc.vim', {})
+vim.api.nvim_create_user_command('Mits', 'source ~/.config/nvim/snippets/mits.vim', {})
+
+
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
 vim.keymap.set("n", "<C-J>", "<C-W><C-J>")
@@ -529,4 +535,30 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		vim.wo.number = false
 	end
 })
+
+-- SNIPPETS {{{
+local snippets = vim.api.nvim_create_augroup('snippets', {clear = true})
+
+vim.api.nvim_create_autocmd({'BufNewFile'}, {
+    pattern = '*.c',
+    group = snippets,
+    desc = 'C snippet',
+    command = "source ~/.config/nvim/snippets/c_snippet.vim"
+})
+
+vim.api.nvim_create_autocmd({'BufNewFile'}, {
+    pattern = '*.py',
+    group = snippets,
+    desc = 'Python snippet',
+    command = "source ~/.config/nvim/snippets/py_snippet.vim"
+})
+
+vim.api.nvim_create_autocmd({'BufNewFile'}, {
+    pattern = '*.sh',
+    group = snippets,
+    desc = 'Shell snippet',
+    command = "source ~/.config/nvim/snippets/sh_snippet.vim"
+})
+-- }}}
+
 -- }}}
