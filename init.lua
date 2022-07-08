@@ -284,6 +284,11 @@ vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | 
 vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour=\'latte\' | colorscheme catppuccin', {})
 vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour=\'mocha\' | colorscheme catppuccin', {})
 
+-- MIT LICENSE
+vim.api.nvim_create_user_command('Mit', 'source ~/.config/nvim/snippets/mit.vim', {})
+vim.api.nvim_create_user_command('Mitc', 'source ~/.config/nvim/snippets/mitc.vim', {})
+vim.api.nvim_create_user_command('Mits', 'source ~/.config/nvim/snippets/mits.vim', {})
+
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
 vim.keymap.set("n", "<C-J>", "<C-W><C-J>")
@@ -292,13 +297,6 @@ vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
 vim.keymap.set("n", "si", ":vsp<CR>")
 vim.keymap.set("n", "su", ":sp<CR>")
 vim.keymap.set("n", "<C-n>", ":Explore<CR>")
-
--- snippets
-vim.keymap.set("n", ";c", ":-1r ~/.config/nvim/snippets/skeleton.c<CR>7j8l :-1r ! date +'\\%b \\%d, \\%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>\"aph2xl")
-vim.keymap.set("n", ";ds", ":-1r ~/.config/nvim/snippets/script-doc.sh<CR>2j8l:r ! date +'\\%b \\%d, \\%Y'<CR>kJjdd")
-vim.keymap.set("n", ";mitc", ":r ~/.config/nvim/snippets/mit.c<CR>j :r ! date +'\\%Y'<CR>kJJ")
-vim.keymap.set("n", ";mits", ":-1r ~/.config/nvim/snippets/mit.sh<CR>j :r ! date +'\\%Y'<CR>kJJ")
-vim.keymap.set("n", ";mitt", ":-1r ~/.config/nvim/snippets/mit.txt<CR>:r ! date +'\\%Y'<CR>kJJ")
 
 -- all modern stuff
 vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
@@ -310,9 +308,9 @@ vim.keymap.set("n", "<C-b>", ":Dispatch<CR>:Copen<CR>")
 -- }}}
 
 -- AUTOCMD {{{
+
+-- BUF SETTINGS {{{
 local buf_settings = vim.api.nvim_create_augroup('buf_settings', {clear = true})
-local win_settings = vim.api.nvim_create_augroup('win_settings', {clear = true})
-local term_settings = vim.api.nvim_create_augroup('win_settings', {clear = true})
 
 vim.api.nvim_create_autocmd({'FileType'}, {
     pattern = {
@@ -368,6 +366,10 @@ vim.api.nvim_create_autocmd({'FileType'}, {
         vim.opt.formatoptions = vim.opt.formatoptions - 't'
     end
 })
+-- }}}
+
+-- WINDOW SETTINGS {{{
+local win_settings = vim.api.nvim_create_augroup('win_settings', {clear = true})
 
 vim.api.nvim_create_autocmd({'FileType'}, {
     pattern = {
@@ -387,7 +389,7 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 
 vim.api.nvim_create_autocmd({'TermEnter'}, {
     pattern = '*',
-    group = term_settings,
+    group = win_settings,
     desc = 'Clean terminal window',
     callback = function()
         vim.wo.relativenumber = false
@@ -398,7 +400,7 @@ vim.api.nvim_create_autocmd({'TermEnter'}, {
 
 vim.api.nvim_create_autocmd({'TermLeave'}, {
     pattern = '*',
-    group = term_settings,
+    group = win_settings,
     desc = 'Reset window after terminal',
     callback = function()
         vim.wo.relativenumber = true
@@ -406,4 +408,31 @@ vim.api.nvim_create_autocmd({'TermLeave'}, {
         vim.wo.signcolumn = 'yes:1'
     end
 })
+-- }}}
+
+-- SNIPPETS {{{
+local snippets = vim.api.nvim_create_augroup('snippets', {clear = true})
+
+vim.api.nvim_create_autocmd({'BufNewFile'}, {
+    pattern = '*.c',
+    group = snippets,
+    desc = 'C snippet',
+    command = "source ~/.config/nvim/snippets/c_snippet.vim"
+})
+
+vim.api.nvim_create_autocmd({'BufNewFile'}, {
+    pattern = '*.py',
+    group = snippets,
+    desc = 'Python snippet',
+    command = "source ~/.config/nvim/snippets/py_snippet.vim"
+})
+
+vim.api.nvim_create_autocmd({'BufNewFile'}, {
+    pattern = '*.sh',
+    group = snippets,
+    desc = 'Shell snippet',
+    command = "source ~/.config/nvim/snippets/sh_snippet.vim"
+})
+-- }}}
+
 -- }}}
