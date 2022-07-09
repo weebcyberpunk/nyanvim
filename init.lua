@@ -264,6 +264,7 @@ vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 vim.opt.mouse = "a"
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.clipboard = vim.opt.clipboard + "unnamedplus"
 -- }}}
 
 -- NETRW {{{
