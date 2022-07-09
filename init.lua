@@ -560,6 +560,13 @@ vim.api.nvim_create_autocmd({'BufNewFile'}, {
     desc = 'Shell snippet',
     command = "source ~/.config/nvim/snippets/sh_snippet.vim"
 })
+
+vim.api.nvim_create_autocmd({'BufNewFile'}, {
+    pattern = '*.html',
+    group = snippets,
+    desc = 'HTML snippet',
+    command = "source ~/.config/nvim/snippets/html_snippet.vim"
+})
 -- }}}
 
 -- }}}
