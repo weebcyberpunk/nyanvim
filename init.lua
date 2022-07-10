@@ -154,6 +154,8 @@ require('packer').startup(function(use)
         })
     end,
     }
+    use 'simrat39/rust-tools.nvim'
+    use 'p00f/clangd_extensions.nvim'
     use { 'hrsh7th/nvim-cmp', requires = {
         'neovim/nvim-lspconfig',
         'hrsh7th/cmp-nvim-lsp',
@@ -224,11 +226,8 @@ require('packer').startup(function(use)
 
         local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
         require('lspconfig')['pyright'].setup({capabilities = capabilities})
-        require('lspconfig')['rust_analyzer'].setup({capabilities = capabilities})
-        require('lspconfig')['clangd'].setup({capabilities = capabilities, cmd = {
-            'clangd', 
-            '--clang-tidy', 
-        }})
+        require('rust-tools').setup({ autoSetHints = false, })
+        require('clangd_extensions').setup({ autoSetHints = false, })
 -- }}}
     end
     }
