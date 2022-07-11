@@ -41,7 +41,10 @@ require('packer').startup(function(use)
 
     -- GIT INTEGRATION {{{
     use { 'lewis6991/gitsigns.nvim', config = function()
-        require('gitsigns').setup()
+        require('gitsigns').setup({
+            signcolumn = false,
+            numhl = true,
+        })
     end,
     }
     -- }}}
@@ -245,7 +248,8 @@ end
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
 vim.opt.foldmethod = "marker"
-vim.opt.signcolumn = "yes:1"
+-- vim.opt.signcolumn = "yes:1"
+vim.opt.signcolumn = "no"
 vim.opt.wrap = false
 vim.opt.hidden = false
 vim.opt.number = true
@@ -280,7 +284,7 @@ vim.g.netrw_use_errorwindow     = 0
 vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
-vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=yes:1', {})
+vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=no', {})
 vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour=\'latte\' | colorscheme catppuccin', {})
 vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour=\'mocha\' | colorscheme catppuccin', {})
 
