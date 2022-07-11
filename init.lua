@@ -155,6 +155,7 @@ require('packer').startup({function(use)
         })
     end
     }
+    use 'caenrique/swap-buffers.nvim'
     -- }}}
 
     -- LUALINE {{{
@@ -434,6 +435,12 @@ vim.keymap.set("n", "<C-K>", "<C-W><C-K>")
 vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
 vim.keymap.set("n", "si", ":vsp<CR>")
 vim.keymap.set("n", "su", ":sp<CR>")
+
+-- swap buffers
+vim.keymap.set("n", "<C-s>h", ":lua require('swap-buffers').swap_buffers('h')<CR>")
+vim.keymap.set("n", "<C-s>j", ":lua require('swap-buffers').swap_buffers('j')<CR>")
+vim.keymap.set("n", "<C-s>k", ":lua require('swap-buffers').swap_buffers('k')<CR>")
+vim.keymap.set("n", "<C-s>l", ":lua require('swap-buffers').swap_buffers('l')<CR>")
 
 -- all modern stuff
 vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
