@@ -51,7 +51,10 @@ require('packer').startup(function(use)
     }
     use 'tpope/vim-eunuch'
     use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
-    use 'weebcyberpunk/run.vim'
+    use { 'weebcyberpunk/run.vim', config = function()
+        vim.g.run_compilewin_cmd = 'tabnew'
+    end,
+    }
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
