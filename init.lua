@@ -58,7 +58,7 @@ require('packer').startup(function(use)
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
-    use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
+    use { 'catppuccin/nvim', as = 'catppuccin', commit = 'd87fa3a826a28c309f066c3464edd2a4a1205700', config = function() 
         -- COLORSCHEME SETTINGS {{{
         -- not load colorscheme on framebuffer
         if os.getenv("TERM") == "linux" then
@@ -120,7 +120,11 @@ require('packer').startup(function(use)
     end
     }
     use 'caenrique/swap-buffers.nvim'
-    use 'ap/vim-buftabline'
+    use { 'ap/vim-buftabline', config = function() 
+        vim.g.buftabline_separators = true
+        vim.g.buftabline_numbers = 2
+    end,
+    }
     -- }}}
 
     -- ZEN MODE {{{
@@ -312,6 +316,18 @@ vim.keymap.set("n", "<C-s>h", ":lua require('swap-buffers').swap_buffers('h')<CR
 vim.keymap.set("n", "<C-s>j", ":lua require('swap-buffers').swap_buffers('j')<CR>")
 vim.keymap.set("n", "<C-s>k", ":lua require('swap-buffers').swap_buffers('k')<CR>")
 vim.keymap.set("n", "<C-s>l", ":lua require('swap-buffers').swap_buffers('l')<CR>")
+
+-- buftabline (need to be in vim script)
+vim.cmd("nnoremap g1 <Plug>BufTabLine.Go(1)")
+vim.cmd("nnoremap g2 <Plug>BufTabLine.Go(2)")
+vim.cmd("nnoremap g3 <Plug>BufTabLine.Go(3)")
+vim.cmd("nnoremap g4 <Plug>BufTabLine.Go(4)")
+vim.cmd("nnoremap g5 <Plug>BufTabLine.Go(5)")
+vim.cmd("nnoremap g6 <Plug>BufTabLine.Go(6)")
+vim.cmd("nnoremap g7 <Plug>BufTabLine.Go(7)")
+vim.cmd("nnoremap g8 <Plug>BufTabLine.Go(8)")
+vim.cmd("nnoremap g9 <Plug>BufTabLine.Go(9)")
+vim.cmd("nnoremap g0 <Plug>BufTabLine.Go(0)")
 
 vim.keymap.set("n", "gp", ":bp<CR>")
 vim.keymap.set("n", "gn", ":bn<CR>")
