@@ -59,6 +59,7 @@ require('packer').startup(function(use)
 
     -- APPEARANCE AND VISUAL HELPERS {{{
     use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
+        -- COLORSCHEME SETTINGS {{{
         -- not load colorscheme on framebuffer
         if os.getenv("TERM") == "linux" then
             vim.cmd("hi SignColumn ctermbg=NONE guibg=NONE")
@@ -102,6 +103,7 @@ require('packer').startup(function(use)
         })
         vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
         vim.cmd('colorscheme catppuccin')
+        -- }}}
     end
     }
     use { 'norcalli/nvim-colorizer.lua', config = function() 
@@ -118,6 +120,7 @@ require('packer').startup(function(use)
     end
     }
     use 'caenrique/swap-buffers.nvim'
+    use 'ap/vim-buftabline'
     -- }}}
 
     -- ZEN MODE {{{
@@ -288,6 +291,7 @@ vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim
 vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=no', {})
 vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour=\'latte\' | colorscheme catppuccin', {})
 vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour=\'mocha\' | colorscheme catppuccin', {})
+vim.api.nvim_create_user_command('BdOthers', '%bd|e#')
 
 -- MIT LICENSE
 vim.api.nvim_create_user_command('Mit', 'source ~/.config/nvim/snippets/mit.vim', {})
@@ -303,11 +307,14 @@ vim.keymap.set("n", "si", ":vsp<CR>")
 vim.keymap.set("n", "su", ":sp<CR>")
 vim.keymap.set("n", "<C-n>", ":Explore<CR>")
 
--- swap buffers within windows
+-- buffers
 vim.keymap.set("n", "<C-s>h", ":lua require('swap-buffers').swap_buffers('h')<CR>")
 vim.keymap.set("n", "<C-s>j", ":lua require('swap-buffers').swap_buffers('j')<CR>")
 vim.keymap.set("n", "<C-s>k", ":lua require('swap-buffers').swap_buffers('k')<CR>")
 vim.keymap.set("n", "<C-s>l", ":lua require('swap-buffers').swap_buffers('l')<CR>")
+
+vim.keymap.set("n", "gp", ":bp<CR>")
+vim.keymap.set("n", "gn", ":bn<CR>")
 
 -- all modern stuff
 vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
