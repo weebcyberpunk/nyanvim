@@ -145,7 +145,7 @@ require('packer').startup(function(use)
     -- TREESITTER {{{
     use { 'nvim-treesitter/nvim-treesitter', config = function()
         require'nvim-treesitter.configs'.setup {
-            ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown", "markdown_inline" },
+            ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown", "markdown_inline", "html", "css", "javascript" },
             highlight = { enable = true, },
         }
     end,
@@ -291,7 +291,7 @@ vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim
 vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=no', {})
 vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour=\'latte\' | colorscheme catppuccin', {})
 vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour=\'mocha\' | colorscheme catppuccin', {})
-vim.api.nvim_create_user_command('BdOthers', '%bd|e#')
+vim.api.nvim_create_user_command('BdOthers', '%bd|e#', {})
 
 -- MIT LICENSE
 vim.api.nvim_create_user_command('Mit', 'source ~/.config/nvim/snippets/mit.vim', {})
