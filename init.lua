@@ -34,12 +34,14 @@ require('packer').startup(function(use)
     use 'lewis6991/impatient.nvim'
 
     -- FORMATTING {{{
+    use 'tpope/vim-commentary'
+    use 'tpope/vim-surround'
     use 'ervandew/matchem'
     use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
     use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
     -- }}}
 
-    -- GIT INTEGRATION {{{
+    -- INTEGRATIONS {{{
     use { 'lewis6991/gitsigns.nvim', config = function()
         require('gitsigns').setup({
             signcolumn = false,
@@ -47,14 +49,9 @@ require('packer').startup(function(use)
         })
     end,
     }
-    -- }}}
-
-    -- TPOPE {{{
-    use 'tpope/vim-dispatch'
-    use 'tpope/vim-commentary'
-    use 'tpope/vim-surround'
     use 'tpope/vim-eunuch'
     use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
+    use 'weebcyberpunk/run.vim'
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
@@ -320,9 +317,9 @@ vim.keymap.set("n", "gn", ":bn<CR>")
 vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 
 -- term and test
-vim.keymap.set("n", "<C-p>", ":Start python<CR>")
-vim.keymap.set("n", "<C-t>", ":Start<CR>")
-vim.keymap.set("n", "<C-b>", ":Dispatch<CR>:Copen<CR>")
+vim.keymap.set("n", "<C-p>", ":Run python<CR>")
+vim.keymap.set("n", "<C-t>", ":Run<CR>")
+vim.keymap.set("n", "<C-b>", ":Compile<CR>")
 -- }}}
 
 -- AUTOCMD {{{
@@ -423,7 +420,7 @@ vim.api.nvim_create_autocmd({'TermLeave'}, {
     callback = function()
         vim.wo.relativenumber = true
         vim.wo.number = true
-        vim.wo.signcolumn = 'yes:1'
+        vim.wo.signcolumn = 'no'
     end
 })
 -- }}}
