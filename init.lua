@@ -122,7 +122,7 @@ require('packer').startup(function(use)
     use 'caenrique/swap-buffers.nvim'
     use { 'pacha/vem-tabline', config = function()
         vim.g.vem_tabline_show = 2
-        vim.g.vem_tabline_show_number = 'index'
+        vim.g.vem_tabline_show_number = 'buffnr'
     end,
     }
     -- }}}
@@ -316,18 +316,6 @@ vim.keymap.set("n", "<C-s>h", ":lua require('swap-buffers').swap_buffers('h')<CR
 vim.keymap.set("n", "<C-s>j", ":lua require('swap-buffers').swap_buffers('j')<CR>")
 vim.keymap.set("n", "<C-s>k", ":lua require('swap-buffers').swap_buffers('k')<CR>")
 vim.keymap.set("n", "<C-s>l", ":lua require('swap-buffers').swap_buffers('l')<CR>")
-
--- buftabline (need to be in vim script)
-vim.keymap.set("n", "g1", ":1tabnext<CR>")
-vim.keymap.set("n", "g2", ":2tabnext<CR>")
-vim.keymap.set("n", "g3", ":3tabnext<CR>")
-vim.keymap.set("n", "g4", ":4tabnext<CR>")
-vim.keymap.set("n", "g5", ":5tabnext<CR>")
-vim.keymap.set("n", "g6", ":6tabnext<CR>")
-vim.keymap.set("n", "g7", ":7tabnext<CR>")
-vim.keymap.set("n", "g8", ":8tabnext<CR>")
-vim.keymap.set("n", "g9", ":9tabnext<CR>")
-
 vim.keymap.set("n", "gp", ":bp<CR>")
 vim.keymap.set("n", "gn", ":bn<CR>")
 
