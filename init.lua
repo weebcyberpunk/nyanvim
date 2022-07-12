@@ -337,6 +337,10 @@ vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 
 -- term and test
 vim.keymap.set("n", "<C-p>", ":Run python<CR>")
+vim.keymap.set("n", "<C-c>j", ":Run node<CR>")
+vim.keymap.set("n", "<C-c>h", ":Run htop<CR>")
+vim.keymap.set("n", "<C-c>m", ":Run ncmpcpp<CR>")
+vim.keymap.set("n", "<C-c>c", ":Run cava<CR>")
 vim.keymap.set("n", "<C-t>", ":Run<CR>")
 vim.keymap.set("n", "<C-b>", ":Compile<CR>")
 -- }}}
