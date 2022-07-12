@@ -120,9 +120,9 @@ require('packer').startup(function(use)
     end
     }
     use 'caenrique/swap-buffers.nvim'
-    use { 'ap/vim-buftabline', config = function() 
-        vim.g.buftabline_separators = true
-        vim.g.buftabline_numbers = 2
+    use { 'pacha/vem-tabline', config = function()
+        vim.g.vem_tabline_show = 2
+        vim.g.vem_tabline_show_number = 'index'
     end,
     }
     -- }}}
@@ -318,16 +318,15 @@ vim.keymap.set("n", "<C-s>k", ":lua require('swap-buffers').swap_buffers('k')<CR
 vim.keymap.set("n", "<C-s>l", ":lua require('swap-buffers').swap_buffers('l')<CR>")
 
 -- buftabline (need to be in vim script)
-vim.cmd("nnoremap g1 <Plug>BufTabLine.Go(1)")
-vim.cmd("nnoremap g2 <Plug>BufTabLine.Go(2)")
-vim.cmd("nnoremap g3 <Plug>BufTabLine.Go(3)")
-vim.cmd("nnoremap g4 <Plug>BufTabLine.Go(4)")
-vim.cmd("nnoremap g5 <Plug>BufTabLine.Go(5)")
-vim.cmd("nnoremap g6 <Plug>BufTabLine.Go(6)")
-vim.cmd("nnoremap g7 <Plug>BufTabLine.Go(7)")
-vim.cmd("nnoremap g8 <Plug>BufTabLine.Go(8)")
-vim.cmd("nnoremap g9 <Plug>BufTabLine.Go(9)")
-vim.cmd("nnoremap g0 <Plug>BufTabLine.Go(0)")
+vim.keymap.set("n", "g1", ":1tabnext<CR>")
+vim.keymap.set("n", "g2", ":2tabnext<CR>")
+vim.keymap.set("n", "g3", ":3tabnext<CR>")
+vim.keymap.set("n", "g4", ":4tabnext<CR>")
+vim.keymap.set("n", "g5", ":5tabnext<CR>")
+vim.keymap.set("n", "g6", ":6tabnext<CR>")
+vim.keymap.set("n", "g7", ":7tabnext<CR>")
+vim.keymap.set("n", "g8", ":8tabnext<CR>")
+vim.keymap.set("n", "g9", ":9tabnext<CR>")
 
 vim.keymap.set("n", "gp", ":bp<CR>")
 vim.keymap.set("n", "gn", ":bn<CR>")
