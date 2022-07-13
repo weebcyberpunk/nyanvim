@@ -55,10 +55,11 @@ require('packer').startup(function(use)
         vim.g.run_compilewin_cmd = 'tabnew'
     end,
     }
+    use 'weebcyberpunk/lf.vim'
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
-    use { 'catppuccin/nvim', as = 'catppuccin', commit = 'd87fa3a826a28c309f066c3464edd2a4a1205700', config = function() 
+    use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
         -- COLORSCHEME SETTINGS {{{
         -- not load colorscheme on framebuffer
         if os.getenv("TERM") == "linux" then
@@ -309,7 +310,8 @@ vim.keymap.set("n", "<C-K>", "<C-W><C-K>")
 vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
 vim.keymap.set("n", "si", ":vsp<CR>")
 vim.keymap.set("n", "su", ":sp<CR>")
-vim.keymap.set("n", "<C-n>", ":Explore<CR>")
+vim.keymap.set("n", "<C-n>", ":LfChangeCwd<CR>")
+vim.keymap.set("n", "<C-f>", ":Lf<CR>")
 
 -- buffers
 vim.keymap.set("n", "<C-s>h", ":lua require('swap-buffers').swap_buffers('h')<CR>")
