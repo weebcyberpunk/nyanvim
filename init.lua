@@ -121,8 +121,8 @@ require('packer').startup(function(use)
     end
     }
     use 'caenrique/swap-buffers.nvim'
-    use { 'weebcyberpunk/statusbufferline.vim', config = function()
-        vim.g.sbline_ruler = 2
+    use { 'weebcyberpunk/statusbufferline.vim', config = function() 
+        vim.opt.showtabline = 2
     end,
     }
     -- }}}
@@ -256,10 +256,8 @@ end
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
 vim.opt.foldmethod = "marker"
--- vim.opt.signcolumn = "yes:1"
 vim.opt.signcolumn = "no"
 vim.opt.wrap = false
-vim.opt.hidden = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
@@ -358,6 +356,17 @@ vim.api.nvim_create_autocmd({'FileType'}, {
     desc = 'Commit auto setting',
     callback = function()
         vim.cmd('setlocal spell')
+    end
+})
+
+vim.api.nvim_create_autocmd({'FileType'}, {
+    pattern = {
+        'fugitive',
+    },
+    group = buf_settings,
+    desc = 'Fugitive auto setting',
+    callback = function()
+        vim.cmd('normal 4j')
     end
 })
 
