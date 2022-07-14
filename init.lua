@@ -121,9 +121,8 @@ require('packer').startup(function(use)
     end
     }
     use 'caenrique/swap-buffers.nvim'
-    use { 'pacha/vem-tabline', config = function()
-        vim.g.vem_tabline_show = 2
-        vim.g.vem_tabline_show_number = 'buffnr'
+    use { 'weebcyberpunk/statusbufferline.vim', config = function()
+        vim.g.sbline_ruler = 2
     end,
     }
     -- }}}
