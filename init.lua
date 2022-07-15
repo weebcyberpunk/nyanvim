@@ -58,10 +58,53 @@ require('packer').startup(function(use)
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
-    use { 'catppuccin/vim', config = function()
-        vim.cmd('colorscheme catppuccin_mocha')
-        vim.cmd('source ~/.config/nvim/scripts/colorscheme.vim')
-    end,
+    use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
+        -- COLORSCHEME SETTINGS {{{
+        -- not load colorscheme on framebuffer
+        if os.getenv("TERM") == "linux" then
+            vim.cmd("hi SignColumn ctermbg=NONE guibg=NONE")
+            vim.cmd("hi Pmenu ctermbg=NONE guibg=NONE ctermfg=Magenta guifg=Magenta")
+            vim.cmd("hi PmenuSel ctermbg=Magenta guibg=Magenta ctermfg=White guifg=White")
+            vim.opt.guicursor = ""
+            return
+        end
+        local catppuccin = require('catppuccin')
+        vim.opt.fillchars = vim.opt.fillchars + "eob: "
+        catppuccin.setup({
+            transparent_background = true,
+            styles = {
+                comments = 'italic',
+                functions = 'italic',
+                keywords = 'NONE',
+                strings = 'NONE',
+                variables = 'NONE',
+            },
+            term_colors = true,
+            integrations = {
+                native_lsp = {
+                    enabled = true,
+                    virtual_text = {
+                        errors = "italic",
+                        hints = "italic",
+                        warnings = "italic",
+                        information = "italic",
+                    },
+                    underlines = {
+                        errors = "underline",
+                        hints = "underline",
+                        warnings = "underline",
+                        information = "underline",
+                    },
+                },
+                cmp = true,
+                gitsigns = true,
+                treesitter = true,
+            },
+        })
+        vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
+        vim.cmd('colorscheme catppuccin')
+        -- }}}
+    end
     }
     use { 'norcalli/nvim-colorizer.lua', config = function() 
         require('colorizer').setup(nil, {
@@ -79,6 +122,16 @@ require('packer').startup(function(use)
     use 'caenrique/swap-buffers.nvim'
     use { 'weebcyberpunk/statusbufferline.vim', config = function() 
         vim.opt.showtabline = 2
+    end,
+    }
+    -- }}}
+
+    -- TREESITTER {{{
+    use { 'nvim-treesitter/nvim-treesitter', config = function()
+        require'nvim-treesitter.configs'.setup {
+            ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown", "markdown_inline", "html", "css", "javascript" },
+            highlight = { enable = true, },
+        }
     end,
     }
     -- }}}
@@ -216,8 +269,8 @@ vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
 vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=no', {})
-vim.api.nvim_create_user_command('LightTheme', 'colorscheme catppuccin_latte', {})
-vim.api.nvim_create_user_command('DarkTheme', 'colorscheme catppuccin_mocha', {})
+vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour="latte" | colorscheme catppuccin', {})
+vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour="mocha" | colorscheme catppuccin', {})
 vim.api.nvim_create_user_command('BdOthers', '%bd|e#', {})
 
 -- MIT LICENSE
@@ -400,13 +453,12 @@ vim.api.nvim_create_autocmd({'BufNewFile'}, {
 })
 -- }}}
 
--- COLORSCHEME {{{
-local colorscheme_auto = vim.api.nvim_create_augroup('colorscheme', {clear = true})
-
+-- COLORSCHEME OVERWRITES {{{
+local color_settings = vim.api.nvim_create_augroup('color_settings', {clear = true})
 vim.api.nvim_create_autocmd({'Colorscheme'}, {
-    pattern = 'catppuccin_*',
-    group = colorscheme_auto,
-    desc = 'Colorscheme autocmd',
+    pattern = '*',
+    group = color_settings,
+    desc = 'Colorscheme autosettings',
     command = "source ~/.config/nvim/scripts/colorscheme.vim"
 })
 -- }}}
