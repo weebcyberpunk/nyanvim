@@ -98,7 +98,6 @@ require('packer').startup(function(use)
                 },
                 cmp = true,
                 gitsigns = true,
-                treesitter = true,
             },
         })
         vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
@@ -141,16 +140,6 @@ require('packer').startup(function(use)
                 },
             },
         })
-    end,
-    }
-    -- }}}
-
-    -- TREESITTER {{{
-    use { 'nvim-treesitter/nvim-treesitter', config = function()
-        require'nvim-treesitter.configs'.setup {
-            ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown", "markdown_inline", "html", "css", "javascript" },
-            highlight = { enable = true, },
-        }
     end,
     }
     -- }}}
