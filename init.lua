@@ -71,6 +71,7 @@ require('packer').startup(function(use)
         end
         local catppuccin = require('catppuccin')
         catppuccin.setup({
+            transparent_background = true,
             styles = {
                 comments = 'italic',
                 functions = 'italic',
@@ -157,14 +158,6 @@ require('packer').startup(function(use)
     -- }}}
 
     -- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
-    use { 'folke/trouble.nvim', config = function()
-        require('trouble').setup({
-            auto_close = true,
-            icons = false,
-            padding = false,
-        })
-    end,
-    }
     use 'simrat39/rust-tools.nvim'
     use 'p00f/clangd_extensions.nvim'
     use { 'hrsh7th/nvim-cmp', requires = {
