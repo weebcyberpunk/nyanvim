@@ -58,52 +58,10 @@ require('packer').startup(function(use)
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
-    use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
-        -- COLORSCHEME SETTINGS {{{
-        -- not load colorscheme on framebuffer
-        if os.getenv("TERM") == "linux" then
-            vim.cmd("hi SignColumn ctermbg=NONE guibg=NONE")
-            vim.cmd("hi Pmenu ctermbg=NONE guibg=NONE ctermfg=Magenta guifg=Magenta")
-            vim.cmd("hi PmenuSel ctermbg=Magenta guibg=Magenta ctermfg=White guifg=White")
-            vim.opt.guicursor = ""
-            return
-        end
-        local catppuccin = require('catppuccin')
-        vim.opt.fillchars = vim.opt.fillchars + "eob: "
-        catppuccin.setup({
-            transparent_background = true,
-            styles = {
-                comments = 'italic',
-                functions = 'italic',
-                keywords = 'NONE',
-                strings = 'NONE',
-                variables = 'NONE',
-            },
-            term_colors = true,
-            integrations = {
-                native_lsp = {
-                    enabled = true,
-                    virtual_text = {
-                        errors = "italic",
-                        hints = "italic",
-                        warnings = "italic",
-                        information = "italic",
-                    },
-                    underlines = {
-                        errors = "underline",
-                        hints = "underline",
-                        warnings = "underline",
-                        information = "underline",
-                    },
-                },
-                cmp = true,
-                gitsigns = true,
-            },
-        })
-        vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
-        vim.cmd('colorscheme catppuccin')
-        -- }}}
-    end
+    use { 'catppuccin/vim', config = function()
+        vim.cmd('colorscheme catppuccin_mocha')
+        vim.cmd('source ~/.config/nvim/scripts/colorscheme.vim')
+    end,
     }
     use { 'norcalli/nvim-colorizer.lua', config = function() 
         require('colorizer').setup(nil, {
@@ -261,14 +219,14 @@ vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
 vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=no', {})
-vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour=\'latte\' | colorscheme catppuccin', {})
-vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour=\'mocha\' | colorscheme catppuccin', {})
+vim.api.nvim_create_user_command('LightTheme', 'colorscheme catppuccin_latte', {})
+vim.api.nvim_create_user_command('DarkTheme', 'colorscheme catppuccin_mocha', {})
 vim.api.nvim_create_user_command('BdOthers', '%bd|e#', {})
 
 -- MIT LICENSE
-vim.api.nvim_create_user_command('Mit', 'source ~/.config/nvim/snippets/mit.vim', {})
-vim.api.nvim_create_user_command('Mitc', 'source ~/.config/nvim/snippets/mitc.vim', {})
-vim.api.nvim_create_user_command('Mits', 'source ~/.config/nvim/snippets/mits.vim', {})
+vim.api.nvim_create_user_command('Mit', 'source ~/.config/nvim/scripts/mit.vim', {})
+vim.api.nvim_create_user_command('Mitc', 'source ~/.config/nvim/scripts/mitc.vim', {})
+vim.api.nvim_create_user_command('Mits', 'source ~/.config/nvim/scripts/mits.vim', {})
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -419,28 +377,39 @@ vim.api.nvim_create_autocmd({'BufNewFile'}, {
     pattern = '*.c',
     group = snippets,
     desc = 'C snippet',
-    command = "source ~/.config/nvim/snippets/c_snippet.vim"
+    command = "source ~/.config/nvim/scripts/c_snippet.vim"
 })
 
 vim.api.nvim_create_autocmd({'BufNewFile'}, {
     pattern = '*.py',
     group = snippets,
     desc = 'Python snippet',
-    command = "source ~/.config/nvim/snippets/py_snippet.vim"
+    command = "source ~/.config/nvim/scripts/py_snippet.vim"
 })
 
 vim.api.nvim_create_autocmd({'BufNewFile'}, {
     pattern = '*.sh',
     group = snippets,
     desc = 'Shell snippet',
-    command = "source ~/.config/nvim/snippets/sh_snippet.vim"
+    command = "source ~/.config/nvim/scripts/sh_snippet.vim"
 })
 
 vim.api.nvim_create_autocmd({'BufNewFile'}, {
     pattern = '*.html',
     group = snippets,
     desc = 'HTML snippet',
-    command = "source ~/.config/nvim/snippets/html_snippet.vim"
+    command = "source ~/.config/nvim/scripts/html_snippet.vim"
+})
+-- }}}
+
+-- COLORSCHEME {{{
+local colorscheme_auto = vim.api.nvim_create_augroup('colorscheme', {clear = true})
+
+vim.api.nvim_create_autocmd({'Colorscheme'}, {
+    pattern = 'catppuccin_*',
+    group = colorscheme_auto,
+    desc = 'Colorscheme autocmd',
+    command = "source ~/.config/nvim/scripts/colorscheme.vim"
 })
 -- }}}
 
