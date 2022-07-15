@@ -51,7 +51,7 @@ require('packer').startup(function(use)
     }
     use 'tpope/vim-eunuch'
     use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
-    use { 'weebcyberpunk/run.vim', config = function()
+    use { 'weebcyberpunk/run.vim', opt = true, cmd = { 'Run', 'Compile' }, config = function()
         vim.g.run_compilewin_cmd = 'tabnew'
     end,
     }
@@ -70,6 +70,7 @@ require('packer').startup(function(use)
             return
         end
         local catppuccin = require('catppuccin')
+        vim.opt.fillchars = vim.opt.fillchars + "eob: "
         catppuccin.setup({
             transparent_background = true,
             styles = {
