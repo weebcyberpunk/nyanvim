@@ -35,7 +35,6 @@ require('packer').startup(function(use)
 
     -- FORMATTING {{{
     use 'tpope/vim-commentary'
-    use 'tpope/vim-surround'
     use 'ervandew/matchem'
     use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
     use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
@@ -99,9 +98,7 @@ require('packer').startup(function(use)
                 },
                 cmp = true,
                 gitsigns = true,
-                lsp_trouble = true,
                 treesitter = true,
-
             },
         })
         vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
