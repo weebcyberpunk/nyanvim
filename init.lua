@@ -311,9 +311,6 @@ vim.keymap.set("n", "<C-s>l", ":lua require('swap-buffers').swap_buffers('l')<CR
 vim.keymap.set("n", "gp", ":bp<CR>")
 vim.keymap.set("n", "gn", ":bn<CR>")
 
--- all modern stuff
-vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
-
 -- term and test
 vim.keymap.set("n", "<C-p>", ":Run python<CR>")
 vim.keymap.set("n", "<C-c>j", ":Run node<CR>")
