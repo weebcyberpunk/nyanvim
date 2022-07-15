@@ -1,15 +1,15 @@
 set fillchars+=eob:\ 
 
-hi PreCondit        guifg=Magenta     ctermfg=Magenta
-hi Macro            guifg=Magenta     ctermfg=Magenta
-hi Define           guifg=Magenta     ctermfg=Magenta
-hi Exception        guifg=Red         ctermfg=Red
-hi Tag              guifg=Green       ctermfg=Green
-hi SpecialChar      guifg=DarkMagenta ctermfg=DarkMagenta
-hi Delimiter        guifg=DarkYellow  ctermfg=DarkYellow
-hi SpecialComment   guifg=Yellow      ctermfg=Yellow
-hi Underlined       guifg=Blue        ctermfg=Blue
-hi Ignore           guifg=Grey        ctermfg=Grey
+hi PreCondit        guifg=LightMagenta ctermfg=LightMagenta
+hi Macro            guifg=LightMagenta ctermfg=LightMagenta
+hi Define           guifg=LightMagenta ctermfg=LightMagenta
+hi Exception        guifg=Red          ctermfg=Red
+hi Tag              guifg=Green        ctermfg=Green
+hi SpecialChar      guifg=Magenta      ctermfg=Magenta
+hi Delimiter        guifg=DarkYellow   ctermfg=DarkYellow
+hi SpecialComment   guifg=Yellow       ctermfg=Yellow
+hi Underlined       guifg=Blue         ctermfg=Blue
+hi Ignore           guifg=Grey         ctermfg=Grey
 
 hi Normal           guibg=NONE ctermbg=NONE
 hi Comment          cterm=italic gui=italic
