@@ -270,16 +270,6 @@ vim.opt.expandtab = true
 vim.opt.clipboard = vim.opt.clipboard + "unnamedplus"
 -- }}}
 
--- NETRW {{{
-vim.g.netrw_banner         = 0
-vim.g.netrw_keepdir         = 0
-vim.g.netrw_localrmdir         = 'rm'
-vim.g.netrw_localrmdiropt     = '-rf'
-vim.g.netrw_sizestyle         = 'H'
-vim.g.netrw_special_syntax     = true
-vim.g.netrw_use_errorwindow     = 0
--- }}}
-
 -- KEYBINDS AND COMMANDS {{{
 vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
@@ -318,7 +308,6 @@ vim.keymap.set("n", "<C-c>j", ":Run node<CR>")
 vim.keymap.set("n", "<C-c>h", ":Run ghci<CR>")
 vim.keymap.set("n", "<C-c>s", ":Run htop<CR>")
 vim.keymap.set("n", "<C-c>m", ":Run ncmpcpp<CR>")
-vim.keymap.set("n", "<C-c>c", ":Run cava<CR>")
 vim.keymap.set("n", "<C-t>", ":Run<CR>")
 vim.keymap.set("n", "<C-b>", ":Compile<CR>")
 -- }}}
