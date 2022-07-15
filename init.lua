@@ -244,7 +244,7 @@ vim.keymap.set("n", "gp", ":bp<CR>")
 vim.keymap.set("n", "gn", ":bn<CR>")
 
 -- term and test
-vim.keymap.set("n", "<C-p>", ":Run python<CR>")
+vim.keymap.set("n", "<C-p>", ":Run python -i -c 'import math; from math import *'<CR>")
 vim.keymap.set("n", "<C-c>j", ":Run node<CR>")
 vim.keymap.set("n", "<C-c>h", ":Run ghci<CR>")
 vim.keymap.set("n", "<C-c>s", ":Run htop<CR>")
