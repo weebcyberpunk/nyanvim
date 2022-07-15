@@ -182,9 +182,6 @@ require('packer').startup(function(use)
     }
     -- }}}
 
-    -- tetris
-    use { 'alec-gibson/nvim-tetris', opt = true, cmd = 'Tetris' }
-
     if packer_bootstrap then
         require('packer').sync()
     end
