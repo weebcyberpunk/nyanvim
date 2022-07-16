@@ -51,10 +51,14 @@ require('packer').startup(function(use)
     use 'tpope/vim-eunuch'
     use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
     use { 'weebcyberpunk/run.vim', opt = true, cmd = { 'Run', 'Compile' }, config = function()
-        vim.g.run_compilewin_cmd = 'tabnew'
+        vim.g.run_compilewin_cmd = 'vsplit'
+        vim.g.run_runwin_cmd = 'vsplit'
     end,
     }
-    use 'weebcyberpunk/lf.vim'
+    use { 'weebcyberpunk/lf.vim', config = function()
+        vim.g.lf_change_cwd_cmd = 'tcd'
+    end,
+    }
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
@@ -129,7 +133,7 @@ require('packer').startup(function(use)
     -- TREESITTER {{{
     use { 'nvim-treesitter/nvim-treesitter', config = function()
         require'nvim-treesitter.configs'.setup {
-            ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown", "markdown_inline", "html", "css", "javascript" },
+            ensure_installed = { "c", "python", "rust", "bash", "lua", "markdown", "markdown_inline", "html", "css", "javascript", "haskell" },
             highlight = { enable = true, },
         }
     end,
