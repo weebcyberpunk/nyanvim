@@ -51,12 +51,12 @@ require('packer').startup(function(use)
     use 'tpope/vim-eunuch'
     use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
     use { 'weebcyberpunk/run.vim', opt = true, cmd = { 'Run', 'Compile' }, config = function()
-        vim.g.run_compilewin_cmd = 'vsplit'
-        vim.g.run_runwin_cmd = 'vsplit'
+        vim.g.run_compilewin_cmd = 'tabnew'
+        vim.g.run_runwin_cmd = 'tabnew'
     end,
     }
     use { 'weebcyberpunk/lf.vim', config = function()
-        vim.g.lf_change_cwd_cmd = 'tcd'
+        vim.g.lf_change_cwd_cmd = 'cd'
     end,
     }
     -- }}}
@@ -160,6 +160,13 @@ require('packer').startup(function(use)
     -- }}}
 
     -- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
+    use { 'folke/trouble.nvim', opt = true, cmd = 'TroubleToggle', config = function()
+        require("trouble").setup({
+            icons = false,
+            padding = false,
+        })
+    end,
+    }
     use 'simrat39/rust-tools.nvim'
     use 'p00f/clangd_extensions.nvim'
     use { 'hrsh7th/nvim-cmp', requires = {
@@ -232,8 +239,16 @@ require('packer').startup(function(use)
 
         local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
         require('lspconfig')['pyright'].setup({capabilities = capabilities})
-        require('rust-tools').setup()
-        require('clangd_extensions').setup()
+        require('rust-tools').setup({
+            tools = {
+                autoSetHints = false,
+            }
+        })
+        require('clangd_extensions').setup({
+            extensions = {
+                autoSetHints = false,
+            },
+        })
 -- }}}
     end
     }
@@ -300,7 +315,7 @@ vim.keymap.set("n", "<C-s>l", ":lua require('swap-buffers').swap_buffers('l')<CR
 vim.keymap.set("n", "gp", ":bp<CR>")
 vim.keymap.set("n", "gn", ":bn<CR>")
 
--- term and test
+-- term, test, etc
 vim.keymap.set("n", "<C-p>", ":Run python<CR>")
 vim.keymap.set("n", "<C-c>p", ":Run python -i -c 'import math; from math import *'<CR>")
 vim.keymap.set("n", "<C-c>j", ":Run node<CR>")
@@ -309,6 +324,7 @@ vim.keymap.set("n", "<C-c>s", ":Run htop<CR>")
 vim.keymap.set("n", "<C-c>m", ":Run ncmpcpp<CR>")
 vim.keymap.set("n", "<C-t>", ":Run<CR>")
 vim.keymap.set("n", "<C-b>", ":Compile<CR>")
+vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 -- }}}
 
 -- AUTOCMD {{{
