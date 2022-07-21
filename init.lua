@@ -119,14 +119,14 @@ require('packer').startup({function(use)
         end
         local catppuccin = require('catppuccin')
         catppuccin.setup({
+            compile = {
+                enabled = true,
+                path = vim.fn.stdpath "cache" .. "/catppuccin"
+            },
             styles = {
                 comments = 'italic',
                 functions = 'italic',
-                keywords = 'NONE',
-                strings = 'NONE',
-                variables = 'NONE',
             },
-            transparent_background = true,
             term_colors = true,
             integrations = {
                 indent_blankline = { enabled = true, },
