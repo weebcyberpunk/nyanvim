@@ -62,7 +62,7 @@ require('packer').startup(function(use)
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
-    use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
+    use { 'catppuccin/nvim', as = 'catppuccin', run = ":CatppuccinCompile", config = function() 
         -- COLORSCHEME SETTINGS {{{
         -- not load colorscheme on framebuffer
         if os.getenv("TERM") == "linux" then
@@ -76,33 +76,17 @@ require('packer').startup(function(use)
         vim.opt.fillchars = vim.opt.fillchars + "eob: "
         catppuccin.setup({
             transparent_background = true,
+            compile = {
+                    enabled = true,
+                    path = vim.fn.stdpath "cache" .. "/catppuccin"
+            },
             styles = {
-                comments = 'italic',
-                functions = 'italic',
-                keywords = 'NONE',
-                strings = 'NONE',
-                variables = 'NONE',
+                comments = { 'italic' },
+                functions = { 'italic' },
             },
             term_colors = true,
             integrations = {
-                native_lsp = {
-                    enabled = true,
-                    virtual_text = {
-                        errors = "italic",
-                        hints = "italic",
-                        warnings = "italic",
-                        information = "italic",
-                    },
-                    underlines = {
-                        errors = "underline",
-                        hints = "underline",
-                        warnings = "underline",
-                        information = "underline",
-                    },
-                },
-                cmp = true,
-                gitsigns = true,
-                treesitter = true,
+                lsp_trouble = true,
             },
         })
         vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
