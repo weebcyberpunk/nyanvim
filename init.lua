@@ -41,13 +41,6 @@ require('packer').startup(function(use)
     -- }}}
 
     -- INTEGRATIONS {{{
-    use { 'lewis6991/gitsigns.nvim', config = function()
-        require('gitsigns').setup({
-            signcolumn = false,
-            numhl = true,
-        })
-    end,
-    }
     use 'tpope/vim-eunuch'
     use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
     use { 'weebcyberpunk/run.vim', opt = true, cmd = { 'Run', 'Compile' }, config = function()
@@ -91,19 +84,6 @@ require('packer').startup(function(use)
         -- }}}
     end
     }
-    use { 'norcalli/nvim-colorizer.lua', config = function() 
-        require('colorizer').setup(nil, {
-            RGB      = true;
-            RRGGBB   = true;
-            names    = true;
-            RRGGBBAA = true;
-            rgb_fn   = true;
-            hsl_fn   = true;
-            css      = true;
-            css_fn   = true;
-        })
-    end
-    }
     use 'caenrique/swap-buffers.nvim'
     use { 'weebcyberpunk/statusbufferline.vim', config = function() 
         vim.opt.showtabline = 2
@@ -121,25 +101,6 @@ require('packer').startup(function(use)
     }
     -- }}}
 
-    -- ZEN MODE {{{
-    use { 'folke/zen-mode.nvim', opt = true, cmd = { 'ZenMode' }, config = function()
-        require('zen-mode').setup({
-            window = {
-                backdrop = 1,
-                width = 85,
-                height = 1,
-                options = {
-                    signcolumn = "no",
-                    number = false,
-                    relativenumber = false,
-                    list = false,
-                },
-            },
-        })
-    end,
-    }
-    -- }}}
-
     -- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
     use { 'folke/trouble.nvim', opt = true, cmd = 'TroubleToggle', config = function()
         require("trouble").setup({
@@ -148,13 +109,12 @@ require('packer').startup(function(use)
         })
     end,
     }
-    use 'simrat39/rust-tools.nvim'
-    use 'p00f/clangd_extensions.nvim'
     use { 'hrsh7th/nvim-cmp', requires = {
+        'p00f/clangd_extensions.nvim',
+        'simrat39/rust-tools.nvim',
         'neovim/nvim-lspconfig',
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-path',
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
     }, config = function() 
@@ -180,14 +140,14 @@ require('packer').startup(function(use)
                     else
                         fallback()
                     end
-                end, { 'i', 's', 'c' }),
+                end, { 'i', 's' }),
                 ['<S-Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
                     else
                         fallback()
                     end
-                end, { 'i', 's', 'c' }),
+                end, { 'i', 's' }),
             }),
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
@@ -197,25 +157,11 @@ require('packer').startup(function(use)
             }),
         })
 
-        cmp.setup.filetype('gitcommit', {
-            sources = cmp.config.sources({
-                { name = 'cmp_git' },
-            }, {
-                { name = 'buffer' },
-            })
-        })
-
         cmp.setup.cmdline('/', {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
                 { name = 'buffer' }
             }
-        })
-        cmp.setup.cmdline(':', {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources({
-                { name = 'path' }
-            })
         })
 
         local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
