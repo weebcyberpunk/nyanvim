@@ -76,10 +76,7 @@ require('packer').startup(function(use)
         vim.opt.fillchars = vim.opt.fillchars + "eob: "
         catppuccin.setup({
             transparent_background = true,
-            compile = {
-                    enabled = true,
-                    path = vim.fn.stdpath "cache" .. "/catppuccin"
-            },
+            compile = { enabled = false, },
             styles = {
                 comments = { 'italic' },
                 functions = { 'italic' },
@@ -89,7 +86,7 @@ require('packer').startup(function(use)
                 lsp_trouble = true,
             },
         })
-        vim.g.catppuccin_flavour = "mocha" -- frappe latte macchiato mocha
+        vim.g.catppuccin_flavour = "mocha"
         vim.cmd('colorscheme catppuccin')
         -- }}}
     end
