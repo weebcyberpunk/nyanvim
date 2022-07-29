@@ -76,6 +76,10 @@ require('packer').startup(function(use)
     -- SOLARIZED {{{
     use 'maxmx03/solarized.nvim'
     -- }}}
+    use { 'RRethy/vim-hexokinase', run = 'make hexokinase', config = function()
+        vim.g.Hexokinase_highlighters = { 'backgroundfull' }
+    end,
+    }
     use 'caenrique/swap-buffers.nvim'
     use { 'weebcyberpunk/statusbufferline.vim', config = function() 
         vim.opt.showtabline = 2
