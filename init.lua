@@ -55,7 +55,7 @@ require('packer').startup(function(use)
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
-    use { 'catppuccin/nvim', as = 'catppuccin', run = ":CatppuccinCompile", config = function() 
+    use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
         -- COLORSCHEME SETTINGS {{{
         -- not load colorscheme on framebuffer
         if os.getenv("TERM") == "linux" then
