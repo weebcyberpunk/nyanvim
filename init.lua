@@ -132,27 +132,36 @@ end
 )
 
 -- GREAT DEFAULTS {{{
-vim.opt.textwidth = 80
-vim.opt.foldmethod = "marker"
-vim.opt.signcolumn = "no"
-vim.opt.wrap = false
-vim.opt.number = true
+-- editing
+vim.opt.textwidth      = 80
+vim.opt.foldmethod     = "marker"
+vim.opt.wrap           = false
+vim.opt.ignorecase     = true
+vim.opt.splitbelow     = true
+vim.opt.splitright     = true
+vim.opt.shiftwidth     = 4
+vim.opt.expandtab      = true
+
+-- appearance
+vim.opt.signcolumn     = "no"
+vim.opt.number         = true
 vim.opt.relativenumber = true
-vim.opt.termguicolors = true
-vim.opt.path = vim.opt.path + "**"
-vim.opt.ignorecase = true
-vim.opt.scrolloff = 10
-vim.opt.wildmode = "list:full"
-vim.opt.wildignore = { "__pycache__/", "test.txt", "test*.txt", "LICENSE", "a.out", "*.gch", ".SRCINFO", ".git" }
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.laststatus = 3
-vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
-vim.opt.mouse = "a"
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.clipboard = vim.opt.clipboard + "unnamedplus"
-vim.opt.completeopt = "menu"
+vim.opt.termguicolors  = true
+vim.opt.scrolloff      = 10
+vim.opt.laststatus     = 3
+vim.opt.cursorline     = true
+
+-- wildmenu/completion
+vim.opt.wildmode       = "list:full"
+vim.opt.wildignore     = { "__pycache__/", "test.txt", "test*.txt", "LICENSE", "a.out", "*.gch", ".SRCINFO", ".git" }
+vim.opt.completeopt    = "menu"
+
+-- others
+vim.opt.clipboard      = vim.opt.clipboard + "unnamedplus"
+vim.opt.mouse          = "a"
+vim.opt.spelllang      = "en,pt" -- I'm brazilian so eventually I write portuguese
+vim.opt.path           = vim.opt.path + "**"
+
 -- }}}
 
 -- KEYBINDS AND COMMANDS {{{
