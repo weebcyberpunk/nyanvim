@@ -102,82 +102,26 @@ require('packer').startup(function(use)
     -- }}}
 
     -- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
-    use { 'folke/trouble.nvim', opt = true, cmd = 'TroubleToggle', config = function()
-        require("trouble").setup({
-            icons = false,
-            padding = false,
-        })
+    use 'ervandew/supertab'
+    use { 'neovim/nvim-lspconfig', config = function()
+
+        vim.keymap.set("n", "<C-d>", vim.diagnostic.setloclist)
+        vim.keymap.set("n", "<C-e>", vim.diagnostic.open_float)
+
+        local on_attach = function(client, bufnr)
+
+            local bufopts = { buffer = bufnr }
+            vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+            vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition,  bufopts)
+            vim.keymap.set('n', 'K',     vim.lsp.buf.hover,       bufopts)
+            vim.keymap.set('n', '<C-q>', vim.lsp.buf.code_action, bufopts)
+        end
+
+        require('lspconfig')['pyright'].setup({on_attach = on_attach})
+        require('lspconfig')['clangd'].setup({on_attach = on_attach})
+        require('lspconfig')['rust_analyzer'].setup({on_attach = on_attach})
     end,
-    }
-    use { 'hrsh7th/nvim-cmp', requires = {
-        'p00f/clangd_extensions.nvim',
-        'simrat39/rust-tools.nvim',
-        'neovim/nvim-lspconfig',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-buffer',
-        'L3MON4D3/LuaSnip',
-        'saadparwaiz1/cmp_luasnip',
-    }, config = function() 
-        -- LSP AND COMPLETION SETTINGS {{{
-        local cmp = require'cmp'
-        cmp.setup({
-            snippet = {
-                expand = function(args)
-                    require('luasnip').lsp_expand(args.body)
-                end,
-            },
-            mapping = cmp.mapping.preset.insert({
-                ['<C-k>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-j>'] = cmp.mapping.scroll_docs(4),
-                ['<C-l>'] = cmp.mapping.complete(),
-                ['<C-Space>'] = cmp.mapping.confirm {
-                    behavior = cmp.ConfirmBehavior.Replace,
-                    select = true,
-                },
-                ['<Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item()
-                    else
-                        fallback()
-                    end
-                end, { 'i', 's' }),
-                ['<S-Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    else
-                        fallback()
-                    end
-                end, { 'i', 's' }),
-            }),
-            sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'luasnip' },
-            }, {
-                { name = 'buffer' },
-            }),
-        })
-
-        cmp.setup.cmdline('/', {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = {
-                { name = 'buffer' }
-            }
-        })
-
-        local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-        require('lspconfig')['pyright'].setup({capabilities = capabilities})
-        require('rust-tools').setup({
-            tools = {
-                autoSetHints = false,
-            }
-        })
-        require('clangd_extensions').setup({
-            extensions = {
-                autoSetHints = false,
-            },
-        })
--- }}}
-    end
     }
     -- }}}
 
@@ -251,7 +195,6 @@ vim.keymap.set("n", "<C-c>s", ":Run htop<CR>")
 vim.keymap.set("n", "<C-c>m", ":Run ncmpcpp<CR>")
 vim.keymap.set("n", "<C-t>", ":Run<CR>")
 vim.keymap.set("n", "<C-b>", ":Compile<CR>")
-vim.keymap.set("n", "<C-d>", ":TroubleToggle<CR>")
 -- }}}
 
 -- AUTOCMD {{{
