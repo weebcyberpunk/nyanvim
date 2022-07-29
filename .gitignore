@@ -1,1 +1,3 @@
+.gitignore
 plugin/
+scripts/colorscheme.vim

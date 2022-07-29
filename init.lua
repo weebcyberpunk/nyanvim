@@ -55,18 +55,9 @@ require('packer').startup(function(use)
     -- }}}
 
     -- APPEARANCE AND VISUAL HELPERS {{{
+    -- CATPPUCCIN {{{
     use { 'catppuccin/nvim', as = 'catppuccin', config = function() 
-        -- COLORSCHEME SETTINGS {{{
-        -- not load colorscheme on framebuffer
-        if os.getenv("TERM") == "linux" then
-            vim.cmd("hi SignColumn ctermbg=NONE guibg=NONE")
-            vim.cmd("hi Pmenu ctermbg=NONE guibg=NONE ctermfg=Magenta guifg=Magenta")
-            vim.cmd("hi PmenuSel ctermbg=Magenta guibg=Magenta ctermfg=White guifg=White")
-            vim.opt.guicursor = ""
-            return
-        end
         local catppuccin = require('catppuccin')
-        vim.opt.fillchars = vim.opt.fillchars + "eob: "
         catppuccin.setup({
             transparent_background = true,
             compile = { enabled = false, },
@@ -79,11 +70,9 @@ require('packer').startup(function(use)
                 lsp_trouble = true,
             },
         })
-        vim.g.catppuccin_flavour = "mocha"
-        vim.cmd('colorscheme catppuccin')
-        -- }}}
     end
     }
+    -- }}}
     use 'caenrique/swap-buffers.nvim'
     use { 'weebcyberpunk/statusbufferline.vim', config = function() 
         vim.opt.showtabline = 2
@@ -164,8 +153,6 @@ vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
 
 vim.api.nvim_create_user_command('Config', 'cd ~/.config/nvim | e ~/.config/nvim/init.lua', {})
 vim.api.nvim_create_user_command('WinReset', 'set number | set relativenumber | set signcolumn=no', {})
-vim.api.nvim_create_user_command('LightTheme', 'let g:catppuccin_flavour="latte" | colorscheme catppuccin', {})
-vim.api.nvim_create_user_command('DarkTheme', 'let g:catppuccin_flavour="mocha" | colorscheme catppuccin', {})
 vim.api.nvim_create_user_command('BdOthers', '%bd|e#', {})
 
 -- MIT LICENSE
@@ -348,14 +335,20 @@ vim.api.nvim_create_autocmd({'BufNewFile'}, {
 })
 -- }}}
 
--- COLORSCHEME OVERWRITES {{{
-local color_settings = vim.api.nvim_create_augroup('color_settings', {clear = true})
-vim.api.nvim_create_autocmd({'Colorscheme'}, {
-    pattern = '*',
-    group = color_settings,
-    desc = 'Colorscheme autosettings',
-    command = "source ~/.config/nvim/scripts/colorscheme.vim"
-})
 -- }}}
+
+-- COLORSCHEMES {{{
+-- not load colorscheme on framebuffer
+if os.getenv("TERM") == "linux" then
+
+    vim.cmd("hi SignColumn ctermbg=NONE guibg=NONE")
+    vim.cmd("hi Pmenu ctermbg=NONE guibg=NONE ctermfg=Magenta guifg=Magenta")
+    vim.cmd("hi PmenuSel ctermbg=Magenta guibg=Magenta ctermfg=White guifg=White")
+    vim.opt.guicursor = ""
+else
+
+    -- symlink for the script
+    vim.cmd('source ~/.config/nvim/scripts/colorscheme.vim')
+end
 
 -- }}}
