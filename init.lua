@@ -292,6 +292,28 @@ vim.api.nvim_create_autocmd({'FileType'}, {
         vim.wo.signcolumn = 'no'
     end
 })
+
+vim.api.nvim_create_autocmd({'TermEnter'}, {
+    pattern = '*',
+    group = win_settings,
+    desc = 'Clean terminal window',
+    callback = function()
+        vim.wo.relativenumber = false
+        vim.wo.number = false
+        vim.wo.signcolumn = 'no'
+    end
+})
+
+vim.api.nvim_create_autocmd({'TermLeave'}, {
+    pattern = '*',
+    group = win_settings,
+    desc = 'Reset window after terminal',
+    callback = function()
+        vim.wo.relativenumber = true
+        vim.wo.number = true
+        vim.wo.signcolumn = 'no'
+    end
+})
 -- }}}
 
 -- SNIPPETS {{{
