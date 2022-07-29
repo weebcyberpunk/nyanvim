@@ -1,1 +1,0 @@
-/home/gg/.config/nvim/scripts/colors/Catppuccin-Dark.vim

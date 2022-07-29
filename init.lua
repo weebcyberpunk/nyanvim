@@ -73,6 +73,9 @@ require('packer').startup(function(use)
     end
     }
     -- }}}
+    -- SOLARIZED {{{
+    use 'maxmx03/solarized.nvim'
+    -- }}}
     use 'caenrique/swap-buffers.nvim'
     use { 'weebcyberpunk/statusbufferline.vim', config = function() 
         vim.opt.showtabline = 2
@@ -337,7 +340,7 @@ vim.api.nvim_create_autocmd({'BufNewFile'}, {
 
 -- }}}
 
--- COLORSCHEMES {{{
+-- COLORSCHEME {{{
 -- not load colorscheme on framebuffer
 if os.getenv("TERM") == "linux" then
 
