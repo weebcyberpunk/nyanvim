@@ -102,7 +102,10 @@ require('packer').startup(function(use)
     -- }}}
 
     -- LSP, COMPLETION AND ALL THAT MODERN STUFF {{{
-    use 'ervandew/supertab'
+    use { 'ervandew/supertab', config = function()
+        vim.cmd("source ~/.config/nvim/scripts/supertab-completion.vim")
+    end,
+    }
     use { 'neovim/nvim-lspconfig', config = function()
 
         vim.keymap.set("n", "<C-d>", vim.diagnostic.setloclist)
@@ -110,8 +113,9 @@ require('packer').startup(function(use)
 
         local on_attach = function(client, bufnr)
 
+            vim.api.nvim_buf_set_option(bufnr, 'completefunc', 'v:lua.vim.lsp.omnifunc')
+
             local bufopts = { buffer = bufnr }
-            vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
             vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition,  bufopts)
             vim.keymap.set('n', 'K',     vim.lsp.buf.hover,       bufopts)
@@ -152,6 +156,7 @@ vim.opt.mouse = "a"
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.clipboard = vim.opt.clipboard + "unnamedplus"
+vim.opt.completeopt = "menu"
 -- }}}
 
 -- KEYBINDS AND COMMANDS {{{
