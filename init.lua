@@ -36,6 +36,11 @@ require('packer').startup(function(use)
     -- FORMATTING {{{
     use 'tpope/vim-commentary'
     use 'ervandew/matchem'
+    use { 'junegunn/vim-easy-align', config = function()
+        vim.cmd("nmap ga <Plug>(EasyAlign)")
+        vim.cmd("xmap ga <Plug>(EasyAlign)")
+    end,
+    }
     use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
     use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
     -- }}}
