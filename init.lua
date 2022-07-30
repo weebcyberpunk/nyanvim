@@ -211,6 +211,11 @@ vim.keymap.set("n", "<C-c>m", ":Run ncmpcpp<CR>")
 vim.keymap.set("n", "<C-t>", ":Run<CR>")
 vim.keymap.set("n", "<C-b>", ":Compile<CR>")
 
+-- Git
+vim.keymap.set("n", "<C-g>g", ":tab G<CR>")
+vim.keymap.set("n", "<C-g>d", ":tab G diff<CR>")
+vim.keymap.set("n", "<C-g>l", ":tab G log<CR>")
+
 -- i usually start vim from <term> -e nvim so this prevents I crashing it with
 -- C-z
 vim.keymap.set("n", "<C-z>", ":echo 'remap this to something lol'<CR>")
