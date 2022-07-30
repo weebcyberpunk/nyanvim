@@ -41,6 +41,7 @@ require('packer').startup(function(use)
         vim.cmd("xmap ga <Plug>(EasyAlign)")
     end,
     }
+    use 'junegunn/vim-markdown-toc'
     use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
     use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '<leader>tm', }
     -- }}}
@@ -86,6 +87,7 @@ require('packer').startup(function(use)
     end,
     }
     use 'caenrique/swap-buffers.nvim'
+    use 'junegunn/vim-slash'
     use { 'weebcyberpunk/statusbufferline.vim', config = function() 
         vim.opt.showtabline = 2
     end,
